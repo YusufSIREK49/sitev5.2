@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Yapay Zekâ ve Dify Ekosistemi | BTÜ Geçerken Docs</title>
+  <meta name="description" content="Dify stüdyosu, sayfa içi asistan ve Farabi AI platformu.">
+  <link rel="icon" href="https://btugecerken.com/logogecerken-Photoroom (1).ico">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="docs.css">
+</head>
+<body data-page="yapay-zeka.html">
+
+  <header class="docs-header">
+    <div class="header-left">
+      <button id="sidebarToggle" class="sidebar-toggle-btn" aria-label="Menü"><i class="fa-solid fa-bars"></i></button>
+      <a href="index.html" class="docs-brand">
+        <img src="https://cdn1.site-media.eu/images/114/22934790/GeerkenLogo-Photoroom-82aMDiSMSNM52OeysD1XRQ-EgWrwxwoIVNv8WhyNw0qWA.png" alt="BTÜ Geçerken Logo">
+        <div class="brand-text"><span class="brand-title">BTÜ GEÇERKEN</span><span class="brand-sub">DOCS</span></div>
+      </a>
+    </div>
+    <div class="header-center">
+      <div class="search-box">
+        <i class="fa-solid fa-magnifying-glass"></i>
+        <input type="text" id="docSearchInput" placeholder="Dokümantasyonda ara... (Ctrl + K)">
+      </div>
+    </div>
+    <div class="header-actions">
+      <a href="https://btugecerken.com" target="_blank" class="custom-header-btn btn-site"><i class="fa-solid fa-arrow-up-right-from-square"></i><span>Ana Site</span></a>
+      <a href="giris.html#surumler-ve-guncellemeler" class="custom-header-btn btn-changelog"><i class="fa-solid fa-code-branch"></i><span>Sürümler &amp; Yenilikler</span><span class="version-pill">v5.2</span></a>
+      <a href="https://github.com/btugecerken" target="_blank" class="custom-header-btn btn-github"><i class="fa-brands fa-github"></i><span>GitHub</span></a>
+    </div>
+  </header>
+
+  <div class="docs-container">
+    <aside class="docs-sidebar" id="docsSidebar"><div class="sidebar-inner" id="sidebarMenu"></div></aside>
+    <main class="docs-main">
+      <div class="docs-content-wrapper">
+        <article class="doc-body" id="docContent">
+        <section class="topic-section" id="dify-studyo-ve-modeller">
+          <h1>Dify Stüdyo Mimarisi ve 3'lü Model Görev Dağılımı</h1>
+          <p>BTÜ Geçerken ekosisteminde çalışan tüm yapay zekâ yetenekleri, Docker üzerinde barındırılan açık kaynak <strong>Dify LLM Orchestration</strong> stüdyosu üzerinden yönetilmektedir.</p>
+
+          <div class="note-box info">
+            <strong>Neden Çoklu Model Mimarisi?</strong> Tek bir yapay zekâ modeline tüm ekosistem görevlerini yüklemek bağlam kirliliğine, yüksek gecikmeye ve kota tıkanmalarına yol açar. Bu nedenle sistem 3 farklı uzman modele bölünmüştür.
+          </div>
+
+          <h2>1. Model Görev Matrisi</h2>
+          <table style="width:100%; border-collapse: collapse; margin: 20px 0; font-size: 14px;">
+            <thead>
+              <tr style="background: #002366; color: #fff; text-align: left;">
+                <th style="padding: 10px; border: 1px solid #ddd;">Asistan Adı</th>
+                <th style="padding: 10px; border: 1px solid #ddd;">Kullanım Konumu</th>
+                <th style="padding: 10px; border: 1px solid #ddd;">Önerilen LLM Çekirdeği</th>
+                <th style="padding: 10px; border: 1px solid #ddd;">Rol ve Uzmanlık Alanı</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td style="padding: 10px; border: 1px solid #ddd;"><strong>İçerik & Dergilik Asistanı</strong></td>
+                <td style="padding: 10px; border: 1px solid #ddd;">Blog & Dergilik Popup Embed</td>
+                <td style="padding: 10px; border: 1px solid #ddd;">Gemini 3.5 Flash-Lite / Flash</td>
+                <td style="padding: 10px; border: 1px solid #ddd;">Açık olan sayfa/PDF metnini bağlam alarak anında özet ve soru-cevap üretimi.</td>
+              </tr>
+              <tr style="background: #f9f9f9;">
+                <td style="padding: 10px; border: 1px solid #ddd;"><strong>BTÜ Geçerken AI (V2.1)</strong></td>
+                <td style="padding: 10px; border: 1px solid #ddd;">Ana Sayfa Widget & Farabi Modeli</td>
+                <td style="padding: 10px; border: 1px solid #ddd;">Gemini 3.5 Flash / Llama 3.3</td>
+                <td style="padding: 10px; border: 1px solid #ddd;">Kampüs yaşamı, topluluk tüzüğü, etkinlik arşivleri ve üniversite rehberliği.</td>
+              </tr>
+              <tr>
+                <td style="padding: 10px; border: 1px solid #ddd;"><strong>Farabi AI (Beta)</strong></td>
+                <td style="padding: 10px; border: 1px solid #ddd;">farabiai.btugecerken.com</td>
+                <td style="padding: 10px; border: 1px solid #ddd;">Gemini 3.5 Flash / Claude</td>
+                <td style="padding: 10px; border: 1px solid #ddd;">Felsefi muhakeme, analitik sorgulama, doküman/görsel analizi ve akıllı başlıklandırma.</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <h2>2. Kota ve Yoğunluk (High Demand) Koruması</h2>
+          <p>Özellikle sayfa içi asistanın yoğun anlarda Google AI Studio tarafındaki <code>high demand (503/429)</code> hatasına takılmasını engellemek için iki aşamalı optimizasyon kuralı uygulanır:</p>
+          <ul>
+            <li><strong>Maksimum Token Sınırı:</strong> Dify model parametrelerinde <code>Max Tokens</code> değeri <code>1024</code> olarak sınırlandırılır; böylece model baştan devasa hesaplama yükü rezerve etmez.</li>
+            <li><strong>Gövde Kırpma (Context Trimming):</strong> <code>script.js</code> sayfa içeriğini toplarken karakter sayısını 1800 ile sınırlandırır; gereksiz HTML etiketlerini ve boşlukları temizler.</li>
+          </ul>
+        </section>
+
+        <section class="topic-section" id="sayfa-ici-asistan-popup">
+          <h1>Sayfa İçi Asistan ve Dinamik Bağlam Yakalama</h1>
+          <p>Kullanıcı bir blog yazısına veya etkinlik detayına girdiğinde sağ altta beliren asistan, genel bir sohbet botu değil; doğrudan <strong>içinde bulunduğu sayfayı okuyan</strong> bir yapay zekâdır.</p>
+
+          <h2>1. Otomatik Sayfa Metni Çıkarma Algoritması</h2>
+          <p>Sayfa açıldığında <code>script.js</code> makalenin başlığını ve ana gövdesini DOM üzerinden dinamik olarak toplar:</p>
+          <pre><code>function collectPageContext() {
+  const titleEl = document.querySelector('h1') || document.title;
+  const contentEl = document.querySelector('.blog-content') || 
+                    document.querySelector('article') || 
+                    document.body;
+
+  const title = typeof titleEl === 'string' ? titleEl : titleEl.innerText;
+  const rawText = contentEl.innerText.replace(/\s+/g, ' ').trim();
+  
+  // Kota koruması için en can alıcı ilk 1800 karakteri bağlam yapar:
+  const trimmedText = rawText.slice(0, 1800);
+
+  return { title, content: trimmedText };
+}</code></pre>
+
+          <h2>2. "Sayfayı Özetle" İstek Hattı</h2>
+          <p>Kullanıcı <em>"Sayfayı Özetle"</em> butonuna tıkladığında istemci Nginx proxy'si üzerinden Dify'a yapılandırılmış bir sistem istemi gönderir:</p>
+          <pre><code>const prompt = `Aşağıdaki makaleyi dikkatle incele ve ana fikrini 3-4 maddelik vurucu bir özet halinde sun:
+Başlık: ${context.title}
+İçerik: ${context.content}`;</code></pre>
+        </section>
+
+        <section class="topic-section" id="farabi-ai-beta-platformu">
+          <h1>Farabi AI Portalı, Streaming ve Dosya Analiz Motoru</h1>
+          <p><strong>Farabi AI</strong>, klasik soru-cevap asistanlarının ötesinde, tam ekran arayüzü ve gelişmiş veri işleme yetenekleriyle bağımsız çalışan bir platformdur.</p>
+
+          <h2>1. SSE Streaming (Server-Sent Events) Akış Mimarisi</h2>
+          <p>Model yanıtlarının daktilo efektiyle parça parça ve gecikmesiz akması için Dify'ın <code>response_mode: "streaming"</code> protokolü kullanılır:</p>
+          <pre><code>// Farabi AI SSE Okuyucu Hattı (app.js)
+const response = await fetch('/api/dify-farabi/chat-messages', {
+  method: 'POST',
+  headers: { 'Content-Type': 'application/json' },
+  body: JSON.stringify(payload)
+});
+
+const reader = response.body.getReader();
+const decoder = new TextDecoder('utf-8');
+let fullAnswer = '';
+
+while (true) {
+  const { done, value } = await reader.read();
+  if (done) break;
+
+  const chunk = decoder.decode(value, { stream: true });
+  const lines = chunk.split('\n');
+
+  for (const line of lines) {
+    if (line.startsWith('data: ')) {
+      const json = JSON.parse(line.slice(6));
+      if (json.event === 'message' || json.event === 'agent_message') {
+        fullAnswer += json.answer || '';
+        onChunk(fullAnswer); // UI'ı her harfte anında günceller
+      }
+    }
+  }
+}</code></pre>
+
+          <h2>2. Yerel Dosya Yükleme ve Analiz Hattı</h2>
+          <p>Kullanıcı ataç butonuna basarak bir PDF, DOCX, tablo veya görsel seçtiğinde, dosya doğrudan Nginx proxy'si üzerinden Dify dosya havuzuna iletilir:</p>
+          <ol>
+            <li>İstemci dosyayı <code>FormData</code> formatında Nginx'in <code>/api/dify-farabi/files/upload</code> rotasına postalar.</li>
+            <li>Dify dosyayı sunucuya kaydeder ve geriye benzersiz bir <code>upload_file_id</code> döndürür.</li>
+            <li>Ardından gönderilen ilk mesajın <code>files</code> dizisine bu ID eklenerek modelin belgeyi bağlam olarak okuması sağlanır.</li>
+          </ol>
+
+          <h2>3. Akıllı Başlıklandırma ve Yerel Depolama (LocalStorage)</h2>
+          <p>Tüm oturum geçmişi kullanıcının kendi cihazında (<code>localStorage</code>) saklanır; böylece sunucuda gereksiz kullanıcı veritabanı tutulmaz. İlk mesaj iletildikten sonra Dify arka planda asenkron olarak 3-4 kelimelik kısa ve net bir sohbet başlığı türeterek sol kenar çubuğuna işler.</p>
+        </section>
+        </article>
+
+        <nav class="doc-pagination">
+          <a href="dergilik.html" class="pag-btn prev"><span class="pag-label"><i class="fa-solid fa-arrow-left"></i> Önceki Bölüm</span><span class="pag-title">4. Dergilik ve PDF Motoru</span></a>
+          <a href="gelistirici.html" class="pag-btn next"><span class="pag-label">Sonraki Bölüm <i class="fa-solid fa-arrow-right"></i></span><span class="pag-title">6. Geliştirici Kılavuzu (How-To)</span></a>
+        </nav>
+      </div>
+    </main>
+  </div>
+
+  <script src="docs-nav.js"></script>
+  <script src="docs.js"></script>
+</body>
+</html>

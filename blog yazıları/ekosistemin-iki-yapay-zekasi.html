@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bir Ekosistemin İki Ayrı Modeli | BTU Geçerken Blog</title>
+    <link href="https://cdn1.site-media.eu/images/114/22934790/GeerkenLogo-Photoroom-82aMDiSMSNM52OeysD1XRQ-EgWrwxwoIVNv8WhyNw0qWA.png" rel="icon" type="image/x-icon"/>
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Noto+Serif+TR:wght@300;400;500;600&family=Amiri:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet"/>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet"/>
+    
+    <link rel="stylesheet" href="../navbar.css">
+    <link rel="stylesheet" href="../style.css">
+
+    <style>
+        .blog-container{max-width:860px;margin:40px auto 80px;background:var(--white);padding:50px 60px;border-radius:20px;box-shadow:var(--shadow);position:relative}
+        .hero-section{border-bottom:1px solid #eee;padding-bottom:30px;margin-bottom:40px}.badge{display:inline-block;background:rgba(26,92,58,0.08);color:var(--emerald);padding:6px 14px;border-radius:50px;font-family:'Syne',sans-serif;font-size:12px;font-weight:700;text-transform:uppercase;margin-bottom:15px}
+        h1{font-family:'Amiri',serif;font-size:42px;line-height:1.25;margin-bottom:20px;color:var(--ink)}
+        .meta-info{font-family:'Syne',sans-serif;font-size:13px;color:var(--muted);display:flex;gap:20px;margin-bottom:20px}.meta-info i{color:var(--gold);margin-right:5px}
+        .summary-box{font-style:italic;border-left:3px solid var(--gold);padding:5px 0 5px 20px;color:var(--ink-soft);margin-bottom:30px}
+        .toc-box{background:#f9f8f4;border:1px solid var(--border);border-radius:12px;padding:25px;margin:40px 0}.toc-title{font-family:'Syne',sans-serif;font-weight:800;text-transform:uppercase;font-size:14px;letter-spacing:0.1em;color:var(--emerald);margin-bottom:15px;border-bottom:2px solid var(--emerald);display:inline-block}
+        .toc-box ul{list-style:none}.toc-box li{margin-bottom:10px}.toc-box a{text-decoration:none;color:var(--ink-soft);font-weight:500;font-size:15px;transition:color .2s;display:flex;align-items:center;gap:10px}.toc-box a:hover{color:var(--emerald)}.toc-box i{font-size:10px;color:var(--gold)}
+        .content p{font-size:17px;margin-bottom:25px;text-align:justify}h2{font-family:'Amiri',serif;font-size:28px;margin:50px 0 25px;color:var(--emerald-d);position:relative;padding-bottom:10px}h2::after{content:'';position:absolute;bottom:0;left:0;width:60px;height:3px;background:var(--gold);border-radius:2px}h3{font-family:'Amiri',serif;font-size:24px;margin:35px 0 15px;color:var(--ink);border-left:4px solid var(--emerald);padding-left:15px}
+        .sources-section{margin-top:60px;padding-top:30px;border-top:2px dashed #eee}.sources-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:12px;margin-top:20px}.source-tag{background:white;border:1px solid #eee;padding:10px 15px;border-radius:8px;text-decoration:none;color:var(--emerald);font-size:13px;font-family:'Syne',sans-serif;font-weight:600;display:flex;align-items:center;gap:8px;transition:all .2s}.source-tag:hover{background:var(--emerald);color:white;transform:translateY(-2px)}
+        @media (max-width:768px){.blog-container{padding:30px 20px;border-radius:0;margin:0}h1{font-size:32px}nav{display:none}}
+    </style>
+</head>
+
+<body>
+<header class="custom-navbar">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo-wrap">
+      <img src="https://cdn1.site-media.eu/images/114/22934790/GeerkenLogo-Photoroom-82aMDiSMSNM52OeysD1XRQ-EgWrwxwoIVNv8WhyNw0qWA.png" alt="BTÜ Geçerken">
+      <div class="nav-logo-text">
+        <span class="nav-univ">Bursa Teknik Üniversitesi</span>
+        <span class="nav-comm">Geçerken Topluluğu</span>
+      </div>
+    </a>
+    <nav id="main-nav">
+      <a href="index.html" class="nav-link">Ana Sayfa</a>
+      <a href="etkinlikler.html" class="nav-link">Etkinlikler</a>
+      <a href="btugecerkenblog.html" class="nav-link active">BTU Geçerken BLOG</a>
+      <a href="https://btugecerkenai.btugecerken.com" class="nav-link">BTU GEÇERKEN AI</a>
+      <a href="ekibimiz.html" class="nav-link">Ekibimiz</a>
+      <a href="https://account.btugecerken.com" target="_blank" class="nav-btn-login">BTU GEÇERKEN ACCOUNT</a>
+    </nav>
+    <button id="mobile-menu-btn" aria-label="Menüyü aç/kapat">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+	
+<article class="blog-container">
+    <div class="hero-section">
+        <span class="badge">Teknoloji & Yapay Zekâ</span>
+        <h1>Bir Ekosistemin İki Ayrı Modeli: BTÜ Geçerken AI V2.1 ve Farabi AI BETA</h1>
+        <div class="meta-info">
+            <span><i class="far fa-user"></i>BTÜ Geçerken Editör Ekibi</span>
+            <span><i class="far fa-calendar"></i> 8 Kasım 2026</span>
+            <span><i class="far fa-clock"></i> 6 dk okuma</span>
+        </div>
+        <div class="summary-box">
+            "Yapay zekâ yolculuğumuzda evirilen modellerimiz nasıl doğdu? BTÜ Geçerken AI ve deneysel araştırma asistanımız Farabi AI’ın ekosistemimizdeki rollerini inceliyoruz."
+        </div>
+    </div>
+
+    <div class="toc-box">
+        <span class="toc-title">İçindekiler</span>
+        <ul>
+            <li><a href="#giris-ekosistemin-evrimi"><i class="fas fa-chevron-right"></i> Giriş: Ekosistemin Evrimi ve Yapay Zekâ Yolculuğumuz</a></li>
+            <li><a href="#btu-gecerken-ai"><i class="fas fa-chevron-right"></i> BTÜ Geçerken AI: Deneyimi Zenginleştiren Site İçi Asistan</a></li>
+            <li><a href="#farabi-ai-beta"><i class="fas fa-chevron-right"></i> Farabi AI BETA: Ar-Ge ve Deneysel Araştırma Asistanı</a></li>
+            <li><a href="#rakip-degil-tamamlayici"><i class="fas fa-chevron-right"></i> Rakip Değil, Aynı Ekosistemin Farklı Parçaları</a></li>
+            <li><a href="#btu-gecerken-yorum"><i class="fas fa-chevron-right"></i> BTÜ Geçerken Yorumu</a></li>
+        </ul>
+    </div>
+
+    <div class="content">
+        <h2 id="giris-ekosistemin-evrimi">Giriş: Ekosistemin Evrimi ve Yapay Zekâ Yolculuğumuz</h2>
+        <p>BTÜ Geçerken ekosisteminde teknoloji ve dijital araçlar sabit bir çizgide kalmaz; topluluğun ihtiyaçları, üyelerin geri bildirimleri ve teknolojik yenilikler doğrultusunda sürekli olarak gelişir. Bu vizyonun bir ürünü olarak önce BTÜ Geçerken AI geliştirilmiş, ardından ortaya çıkan spesifik ihtiyaçlar doğrultusunda sayfa asistanları hayata geçirilmiştir. Zamanla farklı yapay zekâ yaklaşımlarını test etmek ve zihinsel sınırları zorlamak amacıyla Farabi AI fikri doğmuştur. Bu süreç, ekosistemimizin tek tip bir yapı yerine çok katmanlı bir teknoloji laboratuvarına dönüşmesini sağlamıştır.</p>
+
+        <h3 id="btu-gecerken-ai">BTÜ Geçerken AI: Deneyimi Zenginleştiren Site İçi Asistan</h3>
+        <p>Yolculuğumuzun ilk temel taşı olan <strong>BTÜ Geçerken AI</strong>, platformumuzun kullanıcı deneyimini en üst seviyeye taşımak için tasarlanmıştır. Zamanla geliştirilen sayfa asistanları sayesinde bu model; etkinlik sayfalarında, dergi ve PDF okuyucusunda, ayrıca blog yazısının içinde aktif bir rehber olarak konumlanmıştır.</p>
+
+        <p>Bu asistanın temel misyonu; bulunduğu sayfayı anlık olarak özetlemek, kullanıcıdan gelen sorulara doğrudan cevap vermek ve site içi akışı en pratik hale getirmektir. Öğrencilerin ve ziyaretçilerin dijital materyallerle etkileşimini hızlandıran operasyonel bir köprü görevi üstlenir.</p>
+        
+        <h3 id="farabi-ai-beta">Farabi AI BETA: Ar-Ge ve Deneysel Araştırma Asistanı</h3>
+        <p>Ekosistemimizdeki standart operasyonel akışın ötesinde, farklı mimari yaklaşımları denemek ve derinlemesine sorgulamalar yapmak amacıyla <strong>Farabi AI BETA</strong> geliştirilmiştir. Şu anda Ar-Ge ve test aşamasında bulunan Farabi AI, topluluk işlerini yönetmekten ziyade düşünmek, analiz etmek, sorgulamak ve farklı yapay zekâ yaklaşımlarını test etmek üzere kurgulanmıştır.</p>
+
+        <p>İsmini İslam düşünce tarihinin en önemli mantıkçılarından alan bu deneysel yapı; burhanî mantık, kavramsal çözümleme ve epistemik dürüstlük ilkeleriyle çalışır. Amacı, hazır şablonlar üretmek değil; rasyonel düşünce üretimi ve metodolojik testler gerçekleştirmektir.</p>
+        
+        <h3 id="rakip-degil-tamamlayici">Rakip Değil, Aynı Ekosistemin Farklı Parçaları</h3>
+        <p>Sistemlerimizin çeşitlenmesi, zaman zaman farklı rollerin karıştırılmasına yol açabilmektedir. Ancak unutulmamalıdır ki bu iki sistem asla birbiriyle rakip değildir. Aksine, onlar aynı ekosistemin farklı amaçlara hizmet eden tamamlayıcı parçalarıdır.</p>
+
+        <p>Site içi pratik rehberlik, anlık içerik özetleme ve kullanıcı deneyimini artırma ihtiyacı duyduğunuzda muhatabınız <strong>BTÜ Geçerken AI</strong> iken; rasyonel muhakeme, kavramsal analiz ve deneysel Ar-Ge süreçlerini incelemek istediğinizde alan <strong>Farabi AI BETA</strong> modeline aittir.</p>
+
+        <h3 id="btu-gecerken-yorum">Bilgilendirme</h3>
+        <p>Bu blog yazısı <b><em>Farabi AI BETA</em></b> desteğiyle hazırlanmış ve BTÜ Geçerken Topluluğu tarafından yayına alınmıştır.</p>
+
+        <div class="sources-section">
+            <span class="toc-title">Faydalı Linkler</span>
+            <div class="sources-grid">
+                <a href="https://farabiai.btugecerken.com" class="source-tag" target="_blank"><i class="fas fa-link"></i> BTÜ Geçerken AI V2.1 ve Farabi AI Beta</a>
+                <a href="https://btugecerken.com/etkinlikler.html" class="source-tag" target="_blank"><i class="fas fa-link"></i> Topluluk Etkinlikleri</a>
+                <a href="https://docs.btugecerken.com" class="source-tag" target="_blank"><i class="fas fa-link"></i> BTÜ Geçerken DOCS</a>
+            </div>
+        </div>
+    </div>
+</article>
+	
+<script>
+    document.querySelectorAll('.toc-box a').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            const targetId = this.getAttribute('href');
+            const targetElement = document.querySelector(targetId);
+            if (targetElement) {
+                const headerOffset = 100;
+                const elementPosition = targetElement.getBoundingClientRect().top;
+                const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+                window.scrollTo({ top: offsetPosition, behavior: "smooth" });
+            }
+        });
+    });
+</script>
+<script src="navbar.js"></script>
+<script src="script.js"></script>
+
+</body>
+</html>

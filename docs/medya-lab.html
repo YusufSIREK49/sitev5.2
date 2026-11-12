@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Medya ve Lab Ekosistemi | BTÜ Geçerken Docs</title>
+  <meta name="description" content="14 araçlık Lab platformu ve YouTube kanalı entegrasyonu.">
+  <link rel="icon" href="https://btugecerken.com/logogecerken-Photoroom (1).ico">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="docs.css">
+</head>
+<body data-page="medya-lab.html">
+
+  <header class="docs-header">
+    <div class="header-left">
+      <button id="sidebarToggle" class="sidebar-toggle-btn" aria-label="Menü"><i class="fa-solid fa-bars"></i></button>
+      <a href="index.html" class="docs-brand">
+        <img src="https://cdn1.site-media.eu/images/114/22934790/GeerkenLogo-Photoroom-82aMDiSMSNM52OeysD1XRQ-EgWrwxwoIVNv8WhyNw0qWA.png" alt="BTÜ Geçerken Logo">
+        <div class="brand-text"><span class="brand-title">BTÜ GEÇERKEN</span><span class="brand-sub">DOCS</span></div>
+      </a>
+    </div>
+    <div class="header-center">
+      <div class="search-box">
+        <i class="fa-solid fa-magnifying-glass"></i>
+        <input type="text" id="docSearchInput" placeholder="Dokümantasyonda ara... (Ctrl + K)">
+      </div>
+    </div>
+    <div class="header-actions">
+      <a href="https://btugecerken.com" target="_blank" class="custom-header-btn btn-site"><i class="fa-solid fa-arrow-up-right-from-square"></i><span>Ana Site</span></a>
+      <a href="giris.html#surumler-ve-guncellemeler" class="custom-header-btn btn-changelog"><i class="fa-solid fa-code-branch"></i><span>Sürümler &amp; Yenilikler</span><span class="version-pill">v5.2</span></a>
+      <a href="https://github.com/btugecerken" target="_blank" class="custom-header-btn btn-github"><i class="fa-brands fa-github"></i><span>GitHub</span></a>
+    </div>
+  </header>
+
+  <div class="docs-container">
+    <aside class="docs-sidebar" id="docsSidebar"><div class="sidebar-inner" id="sidebarMenu"></div></aside>
+    <main class="docs-main">
+      <div class="docs-content-wrapper">
+        <article class="doc-body" id="docContent">
+        <section class="topic-section" id="lab-sistemi-ve-medya-motoru">
+          <h1>BTÜ Geçerken Lab ve 14'lü Araç Mimarisi (V5.2)</h1>
+          <p><strong>BTÜ Geçerken Lab</strong> (<code>lab.btugecerken.com</code>); öğrencilerin ve dijital üreticilerin görsel, PDF, vektör ve medya işleme ihtiyaçlarını karşılayan, SEO uyumlu ve bağımsız sayfalardan oluşan 14 araçlık bir çalışma ortamıdır.</p>
+
+          <div class="note-box info">
+            <strong>Çoklu Sayfa &amp; Sıfır Sunucu Yükü Prensibi:</strong> Eski monolitik sekme mantığı kaldırılarak her araç kök dizinde fiziksel bir <code>.html</code> dosyasına ve <code>modules/</code> altında bağımsız bir JS modülüne bölünmüştür. İstemci tarafında çalışan araçlar dosyayı sunucuya göndermeden doğrudan tarayıcı belleğinde işler.
+          </div>
+
+          <h2>1. 14 Araçlık Tam Sistem Matrisi</h2>
+          <table style="width:100%; border-collapse: collapse; margin: 20px 0; font-size: 13.5px;">
+            <thead>
+              <tr style="background: #002366; color: #fff; text-align: left;">
+                <th style="padding: 9px; border: 1px solid #ddd;">Araç Adı</th>
+                <th style="padding: 9px; border: 1px solid #ddd;">Kategori</th>
+                <th style="padding: 9px; border: 1px solid #ddd;">Sayfa &amp; Modül</th>
+                <th style="padding: 9px; border: 1px solid #ddd;">Çalışma Katmanı</th>
+                <th style="padding: 9px; border: 1px solid #ddd;">Teknoloji / Kütüphane</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td style="padding: 8px; border: 1px solid #ddd;"><strong>Akıllı Downscaler</strong></td>
+                <td style="padding: 8px; border: 1px solid #ddd;">Görsel &amp; AI</td>
+                <td style="padding: 8px; border: 1px solid #ddd;"><code>resizer.html</code></td>
+                <td style="padding: 8px; border: 1px solid #ddd;">Hibrit (Canvas / API)</td>
+                <td style="padding: 8px; border: 1px solid #ddd;">Canvas 2D / FFmpeg / pypdf</td>
+              </tr>
+              <tr style="background: #f9f9f9;">
+                <td style="padding: 8px; border: 1px solid #ddd;"><strong>Format Dönüştürücü</strong></td>
+                <td style="padding: 8px; border: 1px solid #ddd;">Medya &amp; Dönüşüm</td>
+                <td style="padding: 8px; border: 1px solid #ddd;"><code>converter.html</code></td>
+                <td style="padding: 8px; border: 1px solid #ddd;">Hibrit (Canvas / API)</td>
+                <td style="padding: 8px; border: 1px solid #ddd;">FileReader / FFmpeg 320k Ses</td>
+              </tr>
+              <tr>
+                <td style="padding: 8px; border: 1px solid #ddd;"><strong>AI Arka Plan Temizleyici</strong></td>
+                <td style="padding: 8px; border: 1px solid #ddd;">Görsel &amp; AI</td>
+                <td style="padding: 8px; border: 1px solid #ddd;"><code>bg-remover.html</code></td>
+                <td style="padding: 8px; border: 1px solid #ddd;">Tarayıcı (İstemci)</td>
+                <td style="padding: 8px; border: 1px solid #ddd;">Wasm / Canvas Segmentasyonu</td>
+              </tr>
+              <tr style="background: #f9f9f9;">
+                <td style="padding: 8px; border: 1px solid #ddd;"><strong>AI Çözünürlük Artırıcı</strong></td>
+                <td style="padding: 8px; border: 1px solid #ddd;">Görsel &amp; AI</td>
+                <td style="padding: 8px; border: 1px solid #ddd;"><code>upscaler.html</code></td>
+                <td style="padding: 8px; border: 1px solid #ddd;">Hibrit (Canvas / API)</td>
+                <td style="padding: 8px; border: 1px solid #ddd;">Bicubic Sharp / FFmpeg Lanczos Kernel</td>
+              </tr>
+              <tr>
+                <td style="padding: 8px; border: 1px solid #ddd;"><strong>Evrensel Medya İndirici</strong></td>
+                <td style="padding: 8px; border: 1px solid #ddd;">Medya &amp; Dönüşüm</td>
+                <td style="padding: 8px; border: 1px solid #ddd;"><code>downloader.html</code></td>
+                <td style="padding: 8px; border: 1px solid #ddd;">Sunucu (FastAPI 8001)</td>
+                <td style="padding: 8px; border: 1px solid #ddd;">yt-dlp (Android/Web), FFmpeg 320k Remux</td>
+              </tr>
+              <tr style="background: #f9f9f9;">
+                <td style="padding: 8px; border: 1px solid #ddd;"><strong>PDF Birleştirici</strong></td>
+                <td style="padding: 8px; border: 1px solid #ddd;">PDF Stüdyosu</td>
+                <td style="padding: 8px; border: 1px solid #ddd;"><code>pdf-merge.html</code></td>
+                <td style="padding: 8px; border: 1px solid #ddd;">Tarayıcı (İstemci)</td>
+                <td style="padding: 8px; border: 1px solid #ddd;">pdf-lib (Sıfır Sunucu Yükü)</td>
+              </tr>
+              <tr>
+                <td style="padding: 8px; border: 1px solid #ddd;"><strong>PDF Sayfa Ayırıcı</strong></td>
+                <td style="padding: 8px; border: 1px solid #ddd;">PDF Stüdyosu</td>
+                <td style="padding: 8px; border: 1px solid #ddd;"><code>pdf-split.html</code></td>
+                <td style="padding: 8px; border: 1px solid #ddd;">Tarayıcı (İstemci)</td>
+                <td style="padding: 8px; border: 1px solid #ddd;">pdf-lib Sayfa İndeks Filtresi</td>
+              </tr>
+              <tr style="background: #f9f9f9;">
+                <td style="padding: 8px; border: 1px solid #ddd;"><strong>Görselden PDF</strong></td>
+                <td style="padding: 8px; border: 1px solid #ddd;">PDF Stüdyosu</td>
+                <td style="padding: 8px; border: 1px solid #ddd;"><code>img-to-pdf.html</code></td>
+                <td style="padding: 8px; border: 1px solid #ddd;">Tarayıcı (İstemci)</td>
+                <td style="padding: 8px; border: 1px solid #ddd;">pdf-lib Embed JPG/PNG</td>
+              </tr>
+              <tr>
+                <td style="padding: 8px; border: 1px solid #ddd;"><strong>Toplu WebP Dönüştürücü</strong></td>
+                <td style="padding: 8px; border: 1px solid #ddd;">Görsel &amp; AI</td>
+                <td style="padding: 8px; border: 1px solid #ddd;"><code>batch-webp.html</code></td>
+                <td style="padding: 8px; border: 1px solid #ddd;">Tarayıcı (İstemci)</td>
+                <td style="padding: 8px; border: 1px solid #ddd;">Canvas toBlob + JSZip Paketi</td>
+              </tr>
+              <tr style="background: #f9f9f9;">
+                <td style="padding: 8px; border: 1px solid #ddd;"><strong>SVG Optimizer</strong></td>
+                <td style="padding: 8px; border: 1px solid #ddd;">Görsel &amp; AI</td>
+                <td style="padding: 8px; border: 1px solid #ddd;"><code>svg-opt.html</code></td>
+                <td style="padding: 8px; border: 1px solid #ddd;">Tarayıcı (İstemci)</td>
+                <td style="padding: 8px; border: 1px solid #ddd;">Regex XML Minifier &amp; Metadata Temizliği</td>
+              </tr>
+              <tr>
+                <td style="padding: 8px; border: 1px solid #ddd;"><strong>Favicon &amp; ICO Paketi</strong></td>
+                <td style="padding: 8px; border: 1px solid #ddd;">Görsel &amp; AI</td>
+                <td style="padding: 8px; border: 1px solid #ddd;"><code>ico-maker.html</code></td>
+                <td style="padding: 8px; border: 1px solid #ddd;">Tarayıcı (İstemci)</td>
+                <td style="padding: 8px; border: 1px solid #ddd;">16-512px Canvas Ölçekleme + JSZip</td>
+              </tr>
+              <tr style="background: #f9f9f9;">
+                <td style="padding: 8px; border: 1px solid #ddd;"><strong>QR Kod Oluşturucu</strong></td>
+                <td style="padding: 8px; border: 1px solid #ddd;">Pratik Araçlar</td>
+                <td style="padding: 8px; border: 1px solid #ddd;"><code>qr-maker.html</code></td>
+                <td style="padding: 8px; border: 1px solid #ddd;">Tarayıcı (İstemci)</td>
+                <td style="padding: 8px; border: 1px solid #ddd;">qrcode.js + Canvas PNG Export</td>
+              </tr>
+              <tr>
+                <td style="padding: 8px; border: 1px solid #ddd;"><strong>EXIF &amp; Meta Temizleyici</strong></td>
+                <td style="padding: 8px; border: 1px solid #ddd;">Pratik Araçlar</td>
+                <td style="padding: 8px; border: 1px solid #ddd;"><code>exif-cleaner.html</code></td>
+                <td style="padding: 8px; border: 1px solid #ddd;">Tarayıcı (İstemci)</td>
+                <td style="padding: 8px; border: 1px solid #ddd;">Canvas Ham Piksel Arındırma (GPS Sıfırlama)</td>
+              </tr>
+              <tr style="background: #f9f9f9;">
+                <td style="padding: 8px; border: 1px solid #ddd;"><strong>Toplu Yeniden Adlandırıcı</strong></td>
+                <td style="padding: 8px; border: 1px solid #ddd;">Pratik Araçlar</td>
+                <td style="padding: 8px; border: 1px solid #ddd;"><code>bulk-rename.html</code></td>
+                <td style="padding: 8px; border: 1px solid #ddd;">Tarayıcı (İstemci)</td>
+                <td style="padding: 8px; border: 1px solid #ddd;">ArrayBuffer Yeniden İsimlendirme + JSZip</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <h2>2. FastAPI Backend Servisi (Port 8001)</h2>
+          <p>Medya indirme ve ağır video/ses filtreleme görevleri için <code>lab-backend.service</code> isimli systemd servisi yapılandırılmıştır. Servis <code>127.0.0.1:8001</code> adresinde dinleme yapar ve dosyaları işledikten 10 dakika sonra arka planda otomatik olarak siler (BackgroundTasks):</p>
+          <pre><code># /etc/systemd/system/lab-backend.service
+[Unit]
+Description=BTU Gecerken Lab FastAPI Backend Service
+After=network.target
+
+[Service]
+Type=simple
+User=root
+WorkingDirectory=/var/www/lab/backend
+ExecStart=/usr/local/bin/uvicorn app:app --host 127.0.0.1 --port 8001 --workers 2
+Restart=always
+RestartSec=3
+Environment="PYTHONUNBUFFERED=1"
+
+[Install]
+WantedBy=multi-user.target</code></pre>
+        </section>
+
+        <section class="topic-section" id="video-ve-medya-yayin-mimarisi">
+          <h1>Video ve Medya Yayıncılığı Mimarisi</h1>
+          <p>BTÜ Geçerken ekosisteminde video içeriklerinin sunumu ve dağıtım politikası v5.2 sürümüyle birlikte köklü bir optimizasyondan geçirilmiştir.</p>
+
+          <div class="note-box warning">
+            <strong>BTÜ Geçerken TV Kapatıldı (YouTube Stratejisi):</strong> 
+            V5.0 sürümünde prototipi kurulan web tabanlı 7/24 Viloud canlı yayın motoru ve site içi TV video kataloğu; yüksek bant genişliği tüketimi, iframe kaynaklı performans darboğazları ve öğrenci etkileşimini bölmesi sebebiyle <strong>kasım 2026 itibarıyla tamamen kapatılmıştır</strong>.
+          </div>
+
+          <h2>1. Resmi YouTube Kanalı ve İçerik Göçü</h2>
+          <p>Topluluk tarafından üretilen tüm belgeseller, seminer kayıtları, atölye serileri ve kısa videolar artık doğrudan resmi <strong>BTÜ Geçerken YouTube Kanalı</strong> üzerinden yayınlanmaktadır:</p>
+          <ul>
+            <li><strong>Sıfır Sunucu Maliyeti:</strong> Ağır video dosyalarının sunucuda veya harici embed oynatıcılarda depolanma zorunluluğu ortadan kaldırılmış, sunucu CPU/RAM kaynakları doğrudan Lab ve Farabi yapay zekâ mikroservislerine tahsis edilmiştir.</li>
+            <li><strong>Yüksek Erişilebilirlik:</strong> YouTube'un küresel CDN altyapısı sayesinde mobil uyumluluk, değişken bant genişliğine göre otomatik çözünürlük (360p-4K) ve altyazı desteği doğrudan sağlanmaktadır.</li>
+            <li><strong>Topluluk Etkileşimi:</strong> Yorumlar, canlı sohbetler ve abone bildirimleri tek çatı altında toplanarak etkileşim artırılmıştır.</li>
+          </ul>
+        </section>
+        </article>
+
+        <nav class="doc-pagination">
+          <a href="icerik.html" class="pag-btn prev"><span class="pag-label"><i class="fa-solid fa-arrow-left"></i> Önceki Bölüm</span><span class="pag-title">2. İçerik ve Yayıncılık Motorları</span></a>
+          <a href="dergilik.html" class="pag-btn next"><span class="pag-label">Sonraki Bölüm <i class="fa-solid fa-arrow-right"></i></span><span class="pag-title">4. Dergilik ve PDF Motoru</span></a>
+        </nav>
+      </div>
+    </main>
+  </div>
+
+  <script src="docs-nav.js"></script>
+  <script src="docs.js"></script>
+</body>
+</html>

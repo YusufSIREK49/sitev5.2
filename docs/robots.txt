@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+
+# Site Haritası Bildirimi
+Sitemap: https://docs.btugecerken.com/sitemap.xml

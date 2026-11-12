@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Loading</title>
+  <link rel="stylesheet" href="style.css">
+  
+  <style>
+    .farabi-loader-screen {
+      position: fixed;
+      inset: 0;
+      width: 100vw;
+      height: 100vh;
+      height: 100dvh;
+      background-color: var(--cream-bg, #faf7f2);
+      background-image: 
+        radial-gradient(var(--gold-border, rgba(207, 168, 74, 0.35)) 0.8px, transparent 0.8px),
+        radial-gradient(var(--dot-grid, rgba(0, 155, 119, 0.08)) 0.8px, var(--cream-bg, #faf7f2) 0.8px);
+      background-size: 28px 28px;
+      background-position: 0 0, 14px 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+      transition: opacity 0.6s ease, visibility 0.6s ease;
+    }
+
+    .farabi-loader-screen.fade-out {
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+    }
+
+    /* Sahne Alanı */
+    .blueprint-stage {
+      position: relative;
+      width: 420px;
+      height: 420px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* SVG Teknik Çizim Katmanı */
+    .blueprint-svg {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      overflow: visible;
+      pointer-events: none;
+    }
+
+    /* Kılavuz Eksenleri ve Çizgileri */
+    .bp-axis-main {
+      stroke: var(--primary-emerald, #009B77);
+      stroke-width: 1.2;
+      stroke-dasharray: 4 4;
+      opacity: 0.45;
+    }
+
+    .bp-axis-sub {
+      stroke: var(--gold-accent, #cfa84a);
+      stroke-width: 1;
+      stroke-dasharray: 3 5;
+      opacity: 0.55;
+    }
+
+    /* Dönen Teknik Çemberler */
+    .bp-ring-major {
+      stroke: var(--gold-accent, #cfa84a);
+      stroke-width: 1.5;
+      stroke-dasharray: 6 6;
+      opacity: 0.7;
+      transform-origin: center;
+      animation: bpSpin 35s linear infinite;
+    }
+
+    .bp-ring-minor {
+      stroke: var(--primary-emerald, #009B77);
+      stroke-width: 1.2;
+      stroke-dasharray: 4 8;
+      opacity: 0.65;
+      transform-origin: center;
+      animation: bpSpinRev 22s linear infinite;
+    }
+
+    .bp-circle-tangent-1 {
+      stroke: var(--deep-navy, #002366);
+      stroke-width: 1;
+      stroke-dasharray: 3 4;
+      opacity: 0.45;
+      transform-origin: 140px 140px;
+      animation: bpSpin 16s linear infinite;
+    }
+
+    .bp-circle-tangent-2 {
+      stroke: var(--primary-emerald, #009B77);
+      stroke-width: 1;
+      stroke-dasharray: 3 5;
+      opacity: 0.45;
+      transform-origin: 290px 260px;
+      animation: bpSpinRev 14s linear infinite;
+    }
+
+    .bp-marker {
+      fill: var(--gold-accent, #cfa84a);
+      opacity: 0.85;
+    }
+
+    /* Merkez Logo Alanı */
+    .farabi-logo-frame {
+      position: relative;
+      width: 170px;
+      height: 170px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 
+        0 0 35px rgba(0, 155, 119, 0.22),
+        0 0 10px rgba(207, 168, 74, 0.3);
+      animation: bpPulse 3s ease-in-out infinite;
+      z-index: 2;
+    }
+
+    .farabi-logo-img {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      object-fit: cover;
+      display: block;
+      border: 2px solid var(--gold-accent, #cfa84a);
+    }
+
+    /* Animasyonlar */
+    @keyframes bpSpin {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+
+    @keyframes bpSpinRev {
+      from { transform: rotate(360deg); }
+      to { transform: rotate(0deg); }
+    }
+
+    @keyframes bpPulse {
+      0%, 100% {
+        transform: scale(0.97);
+        box-shadow: 0 0 25px rgba(0, 155, 119, 0.18), 0 0 8px rgba(207, 168, 74, 0.25);
+      }
+      50% {
+        transform: scale(1.03);
+        box-shadow: 0 0 45px rgba(0, 155, 119, 0.35), 0 0 18px rgba(207, 168, 74, 0.45);
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div id="loadingScreen" class="farabi-loader-screen">
+    <div class="blueprint-stage">
+      <!-- Teknik Blueprint Çizgileri -->
+      <svg class="blueprint-svg" viewBox="0 0 420 420">
+        <!-- Yatay ve Dikey Ana Eksenler -->
+        <line x1="-30" y1="210" x2="450" y2="210" class="bp-axis-main" />
+        <line x1="210" y1="-30" x2="210" y2="450" class="bp-axis-main" />
+
+        <!-- Çapraz Kılavuz Çizgileri -->
+        <line x1="40" y1="40" x2="380" y2="380" class="bp-axis-sub" />
+        <line x1="40" y1="380" x2="380" y2="40" class="bp-axis-sub" />
+
+        <!-- Merkez Çemberleri -->
+        <circle cx="210" cy="210" r="185" fill="none" class="bp-ring-major" />
+        <circle cx="210" cy="210" r="135" fill="none" class="bp-ring-minor" />
+
+        <!-- Referans Görseldeki Asimetrik Teğet Kılavuz Çemberleri -->
+        <circle cx="140" cy="140" r="55" fill="none" class="bp-circle-tangent-1" />
+        <circle cx="290" cy="260" r="42" fill="none" class="bp-circle-tangent-2" />
+        <circle cx="120" cy="280" r="28" fill="none" class="bp-circle-tangent-1" />
+
+        <!-- Eksen Ucu Pusula İşaretleri -->
+        <polygon points="210,20 214,28 210,36 206,28" class="bp-marker" />
+        <polygon points="210,384 214,392 210,400 206,392" class="bp-marker" />
+        <polygon points="20,210 28,214 36,210 28,206" class="bp-marker" />
+        <polygon points="384,210 392,214 400,210 392,206" class="bp-marker" />
+      </svg>
+
+      <!-- Merkez Dairesel Amblem -->
+      <div class="farabi-logo-frame">
+        <img src="farabiai-Photoroom.jpg" alt="" class="farabi-logo-img" />
+      </div>
+    </div>
+  </div>
+
+  <script>
+    window.addEventListener('load', () => {
+      const loader = document.getElementById('loadingScreen');
+      setTimeout(() => {
+        loader.classList.add('fade-out');
+        setTimeout(() => loader.remove(), 600);
+      }, 1500);
+    });
+  </script>
+
+</body>
+</html>

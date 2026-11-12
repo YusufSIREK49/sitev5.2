@@ -1,0 +1,4 @@
+User-agent: *
+Disallow:
+
+Sitemap: https://btugecerken.com/sitemap.xml

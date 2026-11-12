@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Giriş, Mimari ve Sürümler | BTÜ Geçerken Docs</title>
+  <meta name="description" content="Ekosistem vizyonu, sunucu ve Nginx yapısı, tasarım kimliği ve sürüm geçmişi.">
+  <link rel="icon" href="https://btugecerken.com/logogecerken-Photoroom (1).ico">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="docs.css">
+</head>
+<body data-page="giris.html">
+
+  <header class="docs-header">
+    <div class="header-left">
+      <button id="sidebarToggle" class="sidebar-toggle-btn" aria-label="Menü"><i class="fa-solid fa-bars"></i></button>
+      <a href="index.html" class="docs-brand">
+        <img src="https://cdn1.site-media.eu/images/114/22934790/GeerkenLogo-Photoroom-82aMDiSMSNM52OeysD1XRQ-EgWrwxwoIVNv8WhyNw0qWA.png" alt="BTÜ Geçerken Logo">
+        <div class="brand-text"><span class="brand-title">BTÜ GEÇERKEN</span><span class="brand-sub">DOCS</span></div>
+      </a>
+    </div>
+    <div class="header-center">
+      <div class="search-box">
+        <i class="fa-solid fa-magnifying-glass"></i>
+        <input type="text" id="docSearchInput" placeholder="Dokümantasyonda ara... (Ctrl + K)">
+      </div>
+    </div>
+    <div class="header-actions">
+      <a href="https://btugecerken.com" target="_blank" class="custom-header-btn btn-site"><i class="fa-solid fa-arrow-up-right-from-square"></i><span>Ana Site</span></a>
+      <a href="giris.html#surumler-ve-guncellemeler" class="custom-header-btn btn-changelog"><i class="fa-solid fa-code-branch"></i><span>Sürümler &amp; Yenilikler</span><span class="version-pill">v5.2</span></a>
+      <a href="https://github.com/btugecerken" target="_blank" class="custom-header-btn btn-github"><i class="fa-brands fa-github"></i><span>GitHub</span></a>
+    </div>
+  </header>
+
+  <div class="docs-container">
+    <aside class="docs-sidebar" id="docsSidebar"><div class="sidebar-inner" id="sidebarMenu"></div></aside>
+    <main class="docs-main">
+      <div class="docs-content-wrapper">
+        <article class="doc-body" id="docContent">
+        <section class="topic-section" id="surumler-ve-guncellemeler">
+          <h1>Sürüm Geçmişi ve Güncellemeler (Changelog)</h1>
+          <p>BTÜ Geçerken dijital ekosistemi açık kaynaklı bir vizyonla geliştirilmektedir. Tüm açık kaynak kodlarımıza, geçmiş versiyonlarımıza ve arşiv repolarımıza resmi organizasyonumuz üzerinden erişebilirsiniz: <a href="https://github.com/btugecerken" target="_blank" style="color: #009B77; font-weight: 700; text-decoration: underline;"><i class="fa-brands fa-github"></i> github.com/btugecerken</a></p>
+
+          <div class="note-box info">
+            <strong>Sürüm Felsefesi:</strong> Projemiz ilk statik prototiplerden (v1), bağımsız yapay zekâ entegrasyonlarına (v3), kurumsal ortak tasarım diline (v4) ve çoklu medya/dergilik ekosistemine (v5 / v5.1 / v5.2) uzanan modüler bir evrim çizgisine sahiptir.
+          </div>
+
+          <div class="version-timeline" style="margin-top: 30px; border-left: 3px solid #009B77; padding-left: 20px;">
+            
+            <!-- btugecerken-v5.2 Güncellemesi -->
+            <div style="margin-bottom: 35px;">
+              <span class="legal-badge" style="background:#009B77; color:#fff; padding:4px 12px; border-radius:12px; font-size:12px; font-weight:700;">btugecerken-v5.2 (Kasım 2026) - Aktif Sürüm</span>
+              <h2 style="margin: 10px 0 8px; font-size: 20px; color:#002366;">BTÜ Geçerken Lab 14 Bağımsız Araç Dönüşümü &amp; TV Kanalı Kararı</h2>
+              <ul>
+                <li><strong>Lab Çoklu Sayfa (Multi-Page) Mimarisine Geçiş:</strong> Tekil SPA ve sekme kısıtlamaları tamamen kaldırılarak her aracın ana dizinde bağımsız bir fiziksel HTML sayfasına (<code>resizer.html</code>, <code>pdf-merge.html</code>, <code>qr-maker.html</code> vb.) sahip olduğu yeni mimariye geçildi.</li>
+                <li><strong>14 Araçlık Kapsamlı Dijital Çalışma Ekosistemi:</strong>
+                  <ul>
+                    <li><em>Görsel &amp; AI:</em> Akıllı Downscaler, AI Arka Plan Temizleyici (Wasm), AI Upscaler, Toplu WebP Dönüştürücü, SVG Optimizer ve Favicon/ICO Paketi Oluşturucu.</li>
+                    <li><em>PDF Stüdyosu:</em> PDF Birleştirici, PDF Sayfa Ayırıcı ve Görselden PDF Albümü Oluşturucu (tamamı istemci taraflı <code>pdf-lib</code> ile sıfır sunucu yükü).</li>
+                    <li><em>Medya &amp; Dönüşüm:</em> Evrensel Dosya Dönüştürücü ve Evrensel Medya İndirici (YouTube, Reels, X).</li>
+                    <li><em>Pratik Araçlar:</em> Özel Renkli Dinamik QR Kod Motoru, EXIF &amp; Meta Gizlilik Temizleyici, Sayaçlı Toplu ZIP Yeniden Adlandırıcı.</li>
+                  </ul>
+                </li>
+                <li><strong>Modüler Vanilla JS Motorları:</strong> Kod şişmesini önlemek amacıyla araç mantıkları <code>modules/</code> dizini altına (<code>pdf-tools.js</code>, <code>image-tools.js</code>, <code>utility-tools.js</code> vb.) dağıtıldı ve dinamik ES6 import mimarisine bağlandı; ana <code>labs.js</code> 9 satırlık hafif köprüye dönüştürüldü.</li>
+                <li><strong>Nginx Uzantısız Temiz URL Entegrasyonu:</strong> <code>try_files $uri $uri.html $uri/ /index.html;</code> kuralıyla tüm araç sayfaları <code>/resizer</code>, <code>/qr-maker</code>, <code>/pdf-merge</code> şeklinde uzantısız çalışır hale getirildi.</li>
+                <li><strong>FastAPI &amp; yt-dlp Mikroservisi (Port 8001):</strong> Python mikroservisi <code>8001</code> portunda systemd (<code>lab-backend.service</code>) olarak kalıcı servis haline getirildi; Android/Web istemci taklidiyle YouTube bot engelleri aşıldı, Ghostscript bağımlılığı kaldırılarak saf Python <code>pypdf</code> akış sıkıştırmasına geçildi.</li>
+                <li><strong>BTÜ Geçerken TV Kapatıldı (YouTube Kanalına Geçiş):</strong> Site içi Viloud TV yayın döngüsü ve yerel web oynatıcı arayüzü operasyonel verimlilik nedeniyle kapatıldı; video ve belgesel yayınlarının doğrudan resmi <strong>BTÜ Geçerken YouTube Kanalı</strong> üzerinden devam etmesine karar verildi.</li>
+              </ul>
+            </div>
+
+            <!-- btugecerken-v5.1 Güncellemesi -->
+            <div style="margin-bottom: 35px;">
+              <span class="legal-badge" style="background:#002366; color:#fff; padding:4px 12px; border-radius:12px; font-size:12px; font-weight:700;">btugecerken-v5.1 (Kasım 2026)</span>
+              <h2 style="margin: 10px 0 8px; font-size: 20px; color:#002366;">İnteraktif Notlama Motoru, Proxy İzolasyonu ve Teknik Docs</h2>
+              <ul>
+                <li><strong>İnteraktif PDF Notlama & Çizim Motoru:</strong> <code>pdf-viewer.html</code> üzerinde PDF.js ile HTML5 Canvas birleştirildi; stylus, tükenmez kalem, fosforlu kalem ve silgi modları geliştirildi.</li>
+                <li><strong>Tarayıcı İçi PDF Derleme:</strong> <code>pdf-lib</code> kütüphanesiyle kullanıcının aldığı çizim notları sunucuya gitmeden tarayıcıda PDF çıktısına fırçalanarak indirilebilir hale getirildi.</li>
+                <li><strong>Nginx Statik Dosya İzolasyonu:</strong> <code>try_files</code> döngüsündeki statik dosya darboğazı giderildi; PDF, JS, CSS ve görseller öncelikli statik blokla doğrudan diskten 0 ms seviyesinde sunulmaya başlandı.</li>
+                <li><strong>İçerik Asistanı Flash-Lite Optimizasyonu:</strong> Sayfa özetleme asistanında kota ve yoğunluk hatalarını engellemek için <code>gemini-3.5-flash-lite</code> mimarisine geçildi, bağlam metni 1800 karaktere ve max tokens 1024'e çekildi.</li>
+                <li><strong>Farabi AI Çift Proxy Desteği:</strong> <code>/api/dify-farabi/</code> rotasına <code>^~</code> önceliği verilerek ana API yönlendirmesiyle çakışması önlendi.</li>
+                <li><strong>Teknik Dokümantasyon Portalı:</strong> Mimari şemaları, servis matrisini ve geliştirici kılavuzlarını sunan <code>docs.btugecerken.com</code> hayata geçirildi.</li>
+              </ul>
+            </div>
+
+            <!-- btugecerken-v5.0 Sürümü -->
+            <div style="margin-bottom: 35px;">
+              <span class="legal-badge" style="background:#002366; color:#fff; padding:3px 10px; border-radius:12px; font-size:11px; font-weight:700;">btugecerken-v5.0 (Ekim 2026) — <a href="https://github.com/btugecerken/siteV5" target="_blank" style="color: #40E0D0;">Repo: siteV5</a></span>
+              <h2 style="margin: 10px 0 8px; font-size: 20px; color:#002366;">Dergilik Rafı, BTÜ Geçerken TV ve 3 Dönemlik Arşiv</h2>
+              <ul>
+                <li><strong>Dijital Dergilik Rafı:</strong> BTÜ Geçerken Culture, Mahya Dergisi ve Account Originals yayınları için periyodik raf düzeni ve tarayıcı içi okuyucu entegre edildi.</li>
+                <li><strong>BTÜ Geçerken TV Platformu (İlk Sürüm):</strong> Viloud Player 7/24 canlı yayın akışı, dinamik Hero Billboard vitrini ve yatay kategori şeritleri kuruldu.</li>
+                <li><strong>Dönemlik Etkinlik Takvimi:</strong> 2024/2025, 2025/2026 ve 2026/2027 dönemlerini kapsayan anlık filtreleme ve modal takvim panosu geliştirildi.</li>
+                <li><strong>Merkezi Dinamik Footer Motoru:</strong> <code>script.js</code> içerisine dizin derinliğini otomatik çözen merkezi footer enjeksiyonu eklendi.</li>
+              </ul>
+            </div>
+
+            <!-- btugecerken-v4.0 Sürümü -->
+            <div style="margin-bottom: 35px;">
+              <span class="legal-badge" style="background:#4b5563; color:#fff; padding:3px 10px; border-radius:12px; font-size:11px; font-weight:700;">btugecerken-v4.0 (Ağustos 2026) — <a href="https://github.com/btugecerken/siteV4" target="_blank" style="color: #40E0D0;">Repo: siteV4</a></span>
+              <h2 style="margin: 10px 0 8px; font-size: 20px; color:#002366;">Ortak Tasarım Dili ve Blog Sisteminin Doğuşu</h2>
+              <ul>
+                <li><strong>Kurumsal Tasarım Dili:</strong> V3'teki farklı tasarım dilleri terk edilerek tüm sayfalara ortak renk paleti (Türk Yeşili, Gece Mavisi, Krem) ve tipografi (Amiri, Syne, Noto Serif TR) kazandırıldı.</li>
+                <li><strong>Blog Motoru Entegrasyonu:</strong> <code>blog.js</code> fihristi üzerinden çalışan kategori filtrelemeli ve bağımsız HTML sayfalı ilk blog altyapısı kuruldu.</li>
+                <li><strong>Yapay Zekânın Ayrılması:</strong> Ana sitede çalışan yapay zekâ modülleri bağımsız <code>ai.btugecerken.com</code> alt alan adına taşınarak mimari sadeleştirildi.</li>
+              </ul>
+            </div>
+
+            <!-- btugecerken-v3.0 Sürümü -->
+            <div style="margin-bottom: 35px;">
+              <span class="legal-badge" style="background:#6b7280; color:#fff; padding:3px 10px; border-radius:12px; font-size:11px; font-weight:700;">btugecerken-v3.0 (Temmuz 2026) — <a href="https://github.com/btugecerken/SiteV3" target="_blank" style="color: #40E0D0;">Repo: SiteV3</a></span>
+              <h2 style="margin: 10px 0 8px; font-size: 20px; color:#002366;">Yapay Zekâ Araçları ve Etkileşimli Modüller</h2>
+              <ul>
+                <li><strong>İlk BTÜ Geçerken AI Modülleri:</strong> Translate Better, Write Prettier, Debug Smarter ve Sheet Smarter araçları site içi servis olarak sunuldu.</li>
+                <li><strong>Yenilikler Pop-Up Modülü:</strong> Ziyaretçilere son duyuruları ve ekosistem yeniliklerini aktaran ilk pop-up motoru devreye alındı.</li>
+              </ul>
+            </div>
+
+            <!-- btugecerken-v2.x Sürümü -->
+            <div style="margin-bottom: 35px;">
+              <span class="legal-badge" style="background:#9ca3af; color:#fff; padding:3px 10px; border-radius:12px; font-size:11px; font-weight:700;">btugecerken-v2.x (Haziran 2026) — <a href="https://github.com/btugecerken/siteV2" target="_blank" style="color: #40E0D0;">Repo: siteV2</a></span>
+              <h2 style="margin: 10px 0 8px; font-size: 20px; color:#002366;">Etkinlikler Motoru Geliştirmeleri</h2>
+              <ul>
+                <li>Topluluk etkinliklerinin kategori bazlı ayrıldığı ve listelendiği ilk <code>Etkinlikler_V2.0</code> ve <code>V2.1</code> prototipleri kodlandı.</li>
+              </ul>
+            </div>
+
+            <!-- btugecerken-v1.0 Başlangıç -->
+            <div>
+              <span class="legal-badge" style="background:#cbd5e1; color:#1e293b; padding:3px 10px; border-radius:12px; font-size:11px; font-weight:700;">btugecerken-v1.0 (Mayıs 2026) — <a href="https://github.com/btugecerken/siteV1" target="_blank" style="color: #009B77;">Repo: siteV1</a></span>
+              <h2 style="margin: 10px 0 8px; font-size: 20px; color:#002366;">İlk Topluluk Portalı ve Arşiv Başlangıcı</h2>
+              <ul>
+                <li>Topluluk tüzüğü, ekip şeması, ilk etkinlik prototipleri, farkındalık kartları ve "Sayılarla Gazze" sayfası statik HTML ile hayata geçirildi.</li>
+              </ul>
+            </div>
+
+          </div>
+        </section>
+
+        <section class="topic-section" id="ekosistem-genel-bakis">
+          <h1>Ekosistem Vizyonu ve Mimari Topoloji</h1>
+          <p>BTÜ Geçerken; Bursa Teknik Üniversitesi bünyesinde ilmi, kültürel, akademik ve teknolojik üretimleri tek bir çatı altında birleştiren bağımsız bir dijital ekosistemdir.</p>
+          
+          <div class="note-box info">
+            <strong>Temel Mimari İlke:</strong> Sistem; bakım maliyeti yüksek ilişkisel veritabanları (RDBMS) veya hantal monolitik CMS katmanları yerine; modern <em>Vanilla JavaScript modülleri</em>, <em>bağımsız fiziksel HTML sayfaları</em>, <em>Nginx ters vekilleri (Reverse Proxy)</em> ve <em>Docker tabanlı Dify LLM servisleri</em> ile mikro mimaride, yüksek hız ve tam izolasyon prensibiyle inşa edilmiştir.
+          </div>
+
+          <h2>1. Uçtan Uca Sistem Mimarisi Şeması</h2>
+          <p>Aşağıdaki görsel harita; kullanıcı katmanından başlayarak Cloudflare kenar ağına, Ubuntu Nginx Gateway yönlendirmelerine ve arka plandaki Docker/LLM işleyicilerine uzanan veri hattını özetlemektedir:</p>
+
+          <!-- Görsel Mimari Vitrini -->
+          <div style="margin: 24px 0; background: #0f172a; border-radius: 12px; border: 1px solid rgba(0, 155, 119, 0.3); overflow: hidden; box-shadow: 0 10px 25px -5px rgba(0, 35, 102, 0.3);">
+            <div style="display: flex; justify-content: space-between; align-items: center; padding: 10px 16px; background: rgba(255, 255, 255, 0.04); border-bottom: 1px solid rgba(255, 255, 255, 0.08);">
+              <span style="font-size: 12px; font-weight: 700; color: #40E0D0; letter-spacing: 0.5px; display: inline-flex; align-items: center; gap: 6px;">
+                <i class="fa-solid fa-network-wired"></i> SİSTEM TOPOLOJİ HARİTASI (V5.2)
+              </span>
+              <a href="https://docs.btugecerken.com/web-mimarimiz.jpeg" target="_blank" style="font-size: 11px; color: #FAF8F5; background: rgba(0, 155, 119, 0.3); padding: 4px 10px; border-radius: 6px; text-decoration: none; font-weight: 600; transition: background 0.2s;">
+                <i class="fa-solid fa-arrow-up-right-from-square"></i> Tam Boyutta İncele
+              </a>
+            </div>
+            
+            <a href="https://docs.btugecerken.com/web-mimarimiz.jpeg" target="_blank" style="display: block; cursor: zoom-in; position: relative;">
+              <img src="https://docs.btugecerken.com/web-mimarimiz.jpeg" 
+                   alt="BTÜ Geçerken Dijital Ekosistemi Sistem Mimarisi" 
+                   style="width: 100%; height: auto; display: block; transition: opacity 0.2s;"
+                   onmouseover="this.style.opacity='0.92'" 
+                   onmouseout="this.style.opacity='1.0'">
+            </a>
+
+            <div style="padding: 12px 18px; font-size: 12px; color: #94a3b8; background: rgba(0, 0, 0, 0.2); border-top: 1px solid rgba(255, 255, 255, 0.05); display: flex; justify-content: space-between; flex-wrap: wrap; gap: 8px;">
+              <span><strong>Mimar:</strong> Proje ve Ar-Ge Ekibi</span>
+              <span><strong>Güvenlik Protokolü:</strong> TLS 1.3 / Clean URLs ($uri $uri.html)</span>
+              <span><strong>Son Güncelleme:</strong> Kasım 2026</span>
+            </div>
+          </div>
+
+          <!-- Teknik ASCII Şeması -->
+          <details style="margin: 20px 0; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; padding: 12px 16px;">
+            <summary style="cursor: pointer; font-weight: 700; color: #002366; font-size: 13.5px; user-select: none;">
+              <i class="fa-solid fa-terminal" style="color: #009B77; margin-right: 6px;"></i> Teknik ASCII Akış Şemasını Görüntüle
+            </summary>
+            <pre style="margin-top: 14px;"><code>+-----------------------------------------------------------------------------------+
+|                              KULLANICI KATMANI                                   |
+|   [Mobil Cihazlar / Tabletler / Masaüstü Tarayıcılar (Chrome, Safari, Firefox)]   |
++-----------------------------------------------------------------------------------+
+                                          |
+                                          | (HTTPS / Port 443 - TLS 1.3)
+                                          v
++-----------------------------------------------------------------------------------+
+|                        CLOUDFLARE DNS & KENAR GÜVENLİK                            |
+|             (DNS Yönetimi, SSL/TLS Edge Sonlandırma, CDN Önbellekleme)            |
++-----------------------------------------------------------------------------------+
+                                          |
+                                          | (Şifrelenmiş Trafik)
+                                          v
++-----------------------------------------------------------------------------------+
+|                     UBUNTU VDS - NGINX TERS VEKİL (GATEWAY)                      |
+|                                                                                   |
+|  [btugecerken.com]       [farabiai...]            [lab...]        [docs...]       |
+|  - Statik Web (/var/www) - Farabi SPA UI          - 14 Bağımsız   - Teknik Docs   |
+|  - Clean URLs ($uri.html)- SSE Streaming Dinleme    HTML Araçları - Dokümantasyon |
+|                                                                                   |
+|  -------------------------- PROXY VE GÜVENLİK HATTI ----------------------------  |
+|  * /api/dify/        --> Nginx Bearer Token Enjeksiyonu --> Dify Core             |
+|  * /api/dify-widget/ --> Nginx Bearer Token Enjeksiyonu --> Dify Core             |
+|  * /api/dify-farabi/ --> Nginx Bearer Token Enjeksiyonu --> Dify Core             |
+|  * lab /api/         --> Reverse Proxy (127.0.0.1:8001) --> FastAPI & yt-dlp      |
++-----------------------------------------------------------------------------------+
+                     |                                       |
+                     | (Yerel Network - 127.0.0.1)           | (Reverse Proxy)
+                     v                                       v
++------------------------------------------+  +------------------------------------+
+|        DOCKER COMPOSE SERVİSLERİ         |  |         PYTHON ÇEKİRDEĞİ           |
+|                                          |  |                                    |
+|  [dify-web]      -> Nginx Web Dashboard  |  |  [Farabi Python Backend]           |
+|  [dify-api]      -> Python / Celery Core |  |  [Lab FastAPI Motoru] (Port 8001)  |
+|  [dify-db]       -> PostgreSQL Veritabanı|  |  - yt-dlp & FFmpeg Remuxer         |
+|  [dify-redis]    -> Redis Önbellek & Kuyruk| |  - pypdf Motoru & 10 Dk Cleanup    |
+|  [dify-sandbox]  -> Güvenli Kod Çalıştırma| +------------------------------------+
++------------------------------------------+
+                     |
+                     | (Giden HTTPS İstekleri - API Calls)
+                     v
++-----------------------------------------------------------------------------------+
+|                         HARİCİ LLM VE MEDYA SAĞLAYICILARI                         |
+|   [Google AI Studio (Gemini)]  |  [Groq (Llama)]  |  [YouTube / IG / X Streams]   |
++-----------------------------------------------------------------------------------+</code></pre>
+          </details>
+
+          <h2>2. Subdomain ve Servis Matrisi</h2>
+          <table style="width:100%; border-collapse: collapse; margin: 20px 0; font-size: 14px;">
+            <thead>
+              <tr style="background: #002366; color: #fff; text-align: left;">
+                <th style="padding: 10px; border: 1px solid #ddd;">Alan Adı</th>
+                <th style="padding: 10px; border: 1px solid #ddd;">Dizin / Port</th>
+                <th style="padding: 10px; border: 1px solid #ddd;">Teknoloji Yığını</th>
+                <th style="padding: 10px; border: 1px solid #ddd;">Temel İşlevi</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td style="padding: 10px; border: 1px solid #ddd;"><strong>btugecerken.com</strong></td>
+                <td style="padding: 10px; border: 1px solid #ddd;"><code>/var/www/btugecerken</code></td>
+                <td style="padding: 10px; border: 1px solid #ddd;">HTML5, Vanilla JS, CSS3, PDF.js</td>
+                <td style="padding: 10px; border: 1px solid #ddd;">Ana portal, Blog, Etkinlik Takvimi, Dergilik.</td>
+              </tr>
+              <tr style="background: #f9f9f9;">
+                <td style="padding: 10px; border: 1px solid #ddd;"><strong>farabiai.btugecerken.com</strong></td>
+                <td style="padding: 10px; border: 1px solid #ddd;"><code>/var/www/farabiai/frontend</code></td>
+                <td style="padding: 10px; border: 1px solid #ddd;">SPA JS, SSE Stream, Python (8000)</td>
+                <td style="padding: 10px; border: 1px solid #ddd;">Felsefi & analitik LLM sohbet ve belge analiz portalı.</td>
+              </tr>
+              <tr>
+                <td style="padding: 10px; border: 1px solid #ddd;"><strong>lab.btugecerken.com</strong></td>
+                <td style="padding: 10px; border: 1px solid #ddd;"><code>/var/www/lab</code> &amp; Port 8001</td>
+                <td style="padding: 10px; border: 1px solid #ddd;">Multi-Page HTML, ES6 Modules, pdf-lib, JSZip, FastAPI, yt-dlp, pypdf</td>
+                <td style="padding: 10px; border: 1px solid #ddd;">14 bağımsız araçlık medya, PDF, görsel işleme ve format dönüştürme merkezi.</td>
+              </tr>
+              <tr style="background: #f9f9f9;">
+                <td style="padding: 10px; border: 1px solid #ddd;"><strong>docs.btugecerken.com</strong></td>
+                <td style="padding: 10px; border: 1px solid #ddd;"><code>/var/www/docs</code></td>
+                <td style="padding: 10px; border: 1px solid #ddd;">Statik JS/JSON Dokümantasyon Motoru</td>
+                <td style="padding: 10px; border: 1px solid #ddd;">Ekosistem mimarisini belgeleyen interaktif teknik merkez.</td>
+              </tr>
+              <tr>
+                <td style="padding: 10px; border: 1px solid #ddd;"><strong>ai.btugecerken.com</strong></td>
+                <td style="padding: 10px; border: 1px solid #ddd;">Docker (8080 &rarr; 80/443)</td>
+                <td style="padding: 10px; border: 1px solid #ddd;">Dify Open-Source, PostgreSQL, Redis</td>
+                <td style="padding: 10px; border: 1px solid #ddd;">Prompt mühendisliği, Chatflow akışları ve API gateway.</td>
+              </tr>
+            </tbody>
+          </table>
+        </section>
+
+        <section class="topic-section" id="sunucu-ve-nginx-yapisi">
+          <h1>Sunucu Yapılandırması ve Nginx Rotaları</h1>
+          <p>Sistem, Linux (Ubuntu LTS) işletim sistemi üzerinde Nginx web sunucusu ve systemd servisleri tarafından yönetilmektedir.</p>
+
+          <h2>1. Sunucu Dosya ve Dizin Hiyerarşisi (Lab V5.2)</h2>
+          <pre><code>/var/www/
+├── btugecerken/                   # Ana Portal Kök Dizini
+│   ├── index.html                 # Ana Karşılama Sayfası
+│   ├── dergilik.html              # Dergi Kataloğu Sayfası
+│   ├── pdf-viewer.html            # İnteraktif Not Alma & Çizim Motoru
+│   ├── btugecerkenblog.html       # Blog İndeks Sayfası
+│   ├── etkinlikler.html           # Etkinlik Arşivi ve Takvim Panosu
+│   ├── yasal-uyari.html           # KVKK, Gizlilik ve Yasal Çerçeve
+│   ├── css/                       # Ortak Tasarım Dosyaları (style.css, navbar.css)
+│   ├── js/                        # Dinamik Veri Motorları
+│   │   ├── blog.js                # Blog Makale Veritabanı
+│   │   ├── etkinlikler.js         # Etkinlik Veritabanı
+│   │   ├── dergilik.js            # Dergilik Arşiv Veritabanı
+│   │   ├── script.js              # Embed AI Popup & Dinamik Footer
+│   │   └── pdf-viewer.js          # Çift Katmanlı Tuval ve PDF-Lib Entegrasyonu
+│   └── *.pdf, *.png, *.ico        # Medya ve Statik Döküman Dosyaları
+│
+├── farabiai/                      # Farabi AI Platformu
+│   └── frontend/
+│       ├── index.html             # Sohbet ve Belge Yükleme Arayüzü
+│       ├── app.js                 # SSE Streaming ve Oturum Yöneticisi
+│       └── style.css              # Farabi Özgün Tema Dosyası
+│
+├── lab/                           # BTÜ Geçerken Lab Platformu (V5.2 Multi-Page)
+│   ├── index.html                 # 14 Araçlık Ana Vitrin & Hub Sayfası
+│   ├── resizer.html               # Akıllı Downscaler (Boyut & Sıkıştırma)
+│   ├── converter.html             # Evrensel Format Dönüştürücü
+│   ├── bg-remover.html            # AI Arka Plan Temizleyici (Wasm)
+│   ├── upscaler.html              # AI Çözünürlük Artırıcı (Lanczos/Unsharp)
+│   ├── downloader.html            # Evrensel Medya İndirici (YouTube/Reels/X)
+│   ├── pdf-merge.html             # PDF Birleştirici (pdf-lib)
+│   ├── pdf-split.html             # PDF Sayfa Ayırıcı (pdf-lib)
+│   ├── img-to-pdf.html            # Görsellerden PDF Albümü Oluşturucu
+│   ├── batch-webp.html            # Toplu WebP Dönüştürücü (JSZip)
+│   ├── svg-opt.html               # SVG Optimizer (XML & Metadata Temizliği)
+│   ├── ico-maker.html             # Favicon & ICO Paketi Oluşturucu
+│   ├── qr-maker.html              # Dinamik Renkli QR Kod Oluşturucu
+│   ├── exif-cleaner.html          # EXIF & Meta Gizlilik Temizleyici
+│   ├── bulk-rename.html           # Toplu Dosya Yeniden Adlandırıcı (ZIP)
+│   ├── sitemap.xml                # 14 Bağımsız Sayfanın Arama Motoru Dizini
+│   ├── labs.css                   # Ortak Lab Teması ve Cam Kart Tasarımı
+│   ├── labs.js                    # Minimal Genel Orkestratör (9 satır)
+│   ├── labs-core.js               # İlerleme Çubuğu, Toast & API Yardımcıları
+│   ├── labsnavbar.js              # Kök Bağımsız Linkli Dinamik Navbar
+│   ├── labsnavbar.css             # Modüler Navbar Stilleri
+│   ├── labsfooter.js              # Ortak Minimal Lab Footer Motoru
+│   ├── modules/                   # Yalıtılmış İstemci JS Modülleri
+│   │   ├── resizer.js             # Downscaler motoru
+│   │   ├── converter.js           # Format dönüştürücü mantığı
+│   │   ├── bg-remover.js          # Arka plan ayıklama fonksiyonu
+│   │   ├── upscaler.js            # Piksel netleştirme köprüsü
+│   │   ├── downloader.js          # Medya analiz ve indirme tetikleyicisi
+│   │   ├── pdf-tools.js           # PDF birleştirme, ayırma ve görsel-PDF motoru
+│   │   ├── image-tools.js         # WebP, SVG ve Favicon derleme motoru
+│   │   └── utility-tools.js       # QR, EXIF ve Toplu Yeniden Adlandırma
+│   └── backend/                   # Python FastAPI Mikroservisi (Port 8001)
+│       ├── app.py                 # FastAPI, yt-dlp, pypdf & FFmpeg Servisi
+│       ├── requirements.txt       # Python Paket Bağımlılıkları
+│       └── downloads/             # 10 Dk Süreli Geçici Dosya Havuzu
+│
+└── docs/                          # Dokümantasyon Portalı (docs.btugecerken.com)
+    ├── index.html                 # Docs Ana Sayfa (6 bölüm kartı)
+    ├── giris.html             # 1. Giriş, Mimari ve Sürümler
+    ├── icerik.html            # 2. İçerik ve Yayıncılık Motorları
+    ├── medya-lab.html         # 3. Medya ve Lab Ekosistemi
+    ├── dergilik.html          # 4. Dergilik ve PDF Motoru
+    ├── yapay-zeka.html        # 5. Yapay Zekâ ve Dify Ekosistemi
+    ├── gelistirici.html       # 6. Geliştirici Kılavuzu (How-To)
+    ├── docs.css                   # Ortak Stil Dosyası
+    ├── docs.js                    # Ortak Menü, Arama ve Kod Kopyalama Motoru
+    └── docs-nav.js                # Menü ve Arama Fihristi
+
+          <h2>2. Kritik Nginx Yönlendirme Kuralları (lab.btugecerken.com)</h2>
+          <h3>A. Uzantısız Temiz URL Çözümlemesi ($uri $uri.html)</h3>
+          <p>Kullanıcıların veya arama motorlarının <code>/resizer</code> yazdığında arka planda <code>resizer.html</code> dosyasına yönlendirilmesi için Nginx kuralı:</p>
+          <pre><code>location / {
+    root /var/www/lab;
+    index index.html;
+    try_files $uri $uri.html $uri/ /index.html;
+}</code></pre>
+
+          <h3>B. Statik Dosyaların Döngüden Korunması</h3>
+          <pre><code>location ~* \.(pdf|png|jpg|jpeg|gif|ico|webp|svg|css|js|woff|woff2)$ {
+    root /var/www/btugecerken;
+    access_log off;
+    expires 7d;
+    add_header Cache-Control "public, max-age=604800";
+    try_files $uri =404;
+}</code></pre>
+
+          <h3>C. Nginx Düzeyinde API Yetkilendirme (Reverse Proxy)</h3>
+          <pre><code>location /api/dify/ {
+    proxy_pass https://ai.btugecerken.com/v1/;
+    proxy_ssl_server_name on;
+    proxy_set_header Host ai.btugecerken.com;
+    proxy_set_header X-Real-IP $remote_addr;
+    proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+    proxy_set_header X-Forwarded-Proto $scheme;
+    proxy_set_header Authorization "Bearer YOUR_DIFY_APP_KEY";
+    proxy_buffering off;
+    proxy_cache off;
+    proxy_read_timeout 120s;
+}</code></pre>
+
+          <h3>D. FastAPI Backend Reverse Proxy (Port 8001)</h3>
+          <p>Büyük video ve ağır PDF aktarımlarında zaman aşımı olmaması için <code>client_max_body_size 250M</code> ve 600 saniyelik okuma tamponu tanımlanmıştır:</p>
+          <pre><code>location /api/ {
+    proxy_pass http://127.0.0.1:8001;
+    proxy_http_version 1.1;
+    proxy_set_header Upgrade $http_upgrade;
+    proxy_set_header Connection "upgrade";
+    proxy_set_header Host $host;
+    proxy_set_header X-Real-IP $remote_addr;
+    proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+    proxy_set_header X-Forwarded-Proto $scheme;
+    client_max_body_size 250M;
+    proxy_read_timeout 600s;
+    proxy_connect_timeout 600s;
+    proxy_send_timeout 600s;
+    proxy_buffering off;
+}</code></pre>
+        </section>
+
+        <section class="topic-section" id="tasarim-kimligi-ve-css">
+          <h1>Tasarım Kimliği ve Tipografi Sistemi</h1>
+          <p>BTÜ Geçerken arayüz mimarisi; tarihsel kütüphane ve medeniyet estetiğini modern, sade ve fonksiyonel bir kullanıcı deneyimiyle birleştirir.</p>
+
+          <h2>1. Kurumsal Renk Standartları</h2>
+          <ul>
+            <li><strong>%60 Zemin: Krem / Sand (<code>#FAF8F5</code>):</strong> Uzun okumalarda gözü yormayan sıcak arka plan dokusu.</li>
+            <li><strong>%30 Yapı: Gece Mavisi (<code>#002366</code>):</strong> Kart kenarlıkları, tipografik başlıklar ve kurumsal ağırlık.</li>
+            <li><strong>%10 Vurgu: Türk Yeşili (<code>#009B77</code>):</strong> Birincil butonlar, aktif sekme göstergeleri ve başarı durumları.</li>
+            <li><strong>Mikro Vurgu: Turkuaz (<code>#40E0D0</code>):</strong> Canlı yayın etiketleri, parıltı efektleri ve bildirim noktaları.</li>
+          </ul>
+
+          <h2>2. Tipografi Matrisi</h2>
+          <table style="width:100%; border-collapse: collapse; margin: 20px 0; font-size: 14px;">
+            <thead>
+              <tr style="background: #009B77; color: #fff; text-align: left;">
+                <th style="padding: 10px; border: 1px solid #ddd;">Yazı Tipi</th>
+                <th style="padding: 10px; border: 1px solid #ddd;">Karakter Sınıfı</th>
+                <th style="padding: 10px; border: 1px solid #ddd;">Kullanım Alanı</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td style="padding: 10px; border: 1px solid #ddd;"><strong>Amiri</strong></td>
+                <td style="padding: 10px; border: 1px solid #ddd;">Geleneksel Serif</td>
+                <td style="padding: 10px; border: 1px solid #ddd;">Ana başlıklar (H1, H2), hero sloganları, edebi vecizeler.</td>
+              </tr>
+              <tr style="background: #f9f9f9;">
+                <td style="padding: 10px; border: 1px solid #ddd;"><strong>Syne</strong></td>
+                <td style="padding: 10px; border: 1px solid #ddd;">Modern Geometrik Sans</td>
+                <td style="padding: 10px; border: 1px solid #ddd;">Navigasyon bağlantıları, sayaçlar, butonlar ve rozetler.</td>
+              </tr>
+              <tr>
+                <td style="padding: 10px; border: 1px solid #ddd;"><strong>Noto Serif TR</strong></td>
+                <td style="padding: 10px; border: 1px solid #ddd;">Okuma Serifi</td>
+                <td style="padding: 10px; border: 1px solid #ddd;">Makale gövde metinleri, blog paragrafları ve açıklamalar.</td>
+              </tr>
+              <tr style="background: #f9f9f9;">
+                <td style="padding: 10px; border: 1px solid #ddd;"><strong>JetBrains Mono</strong></td>
+                <td style="padding: 10px; border: 1px solid #ddd;">Monospace Kod Fontu</td>
+                <td style="padding: 10px; border: 1px solid #ddd;">Teknik kod blokları, dosya boyutları, piksel ölçüleri ve sayaçlar.</td>
+              </tr>
+            </tbody>
+          </table>
+        </section>
+        </article>
+
+        <nav class="doc-pagination">
+
+          <a href="icerik.html" class="pag-btn next"><span class="pag-label">Sonraki Bölüm <i class="fa-solid fa-arrow-right"></i></span><span class="pag-title">2. İçerik ve Yayıncılık Motorları</span></a>
+        </nav>
+      </div>
+    </main>
+  </div>
+
+  <script src="docs-nav.js"></script>
+  <script src="docs.js"></script>
+</body>
+</html>

@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Geliştirici Kılavuzu (How-To) | BTÜ Geçerken Docs</title>
+  <meta name="description" content="Blog, etkinlik, dergi ve yasal uyarı güncelleme prosedürleri.">
+  <link rel="icon" href="https://btugecerken.com/logogecerken-Photoroom (1).ico">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="docs.css">
+</head>
+<body data-page="gelistirici.html">
+
+  <header class="docs-header">
+    <div class="header-left">
+      <button id="sidebarToggle" class="sidebar-toggle-btn" aria-label="Menü"><i class="fa-solid fa-bars"></i></button>
+      <a href="index.html" class="docs-brand">
+        <img src="https://cdn1.site-media.eu/images/114/22934790/GeerkenLogo-Photoroom-82aMDiSMSNM52OeysD1XRQ-EgWrwxwoIVNv8WhyNw0qWA.png" alt="BTÜ Geçerken Logo">
+        <div class="brand-text"><span class="brand-title">BTÜ GEÇERKEN</span><span class="brand-sub">DOCS</span></div>
+      </a>
+    </div>
+    <div class="header-center">
+      <div class="search-box">
+        <i class="fa-solid fa-magnifying-glass"></i>
+        <input type="text" id="docSearchInput" placeholder="Dokümantasyonda ara... (Ctrl + K)">
+      </div>
+    </div>
+    <div class="header-actions">
+      <a href="https://btugecerken.com" target="_blank" class="custom-header-btn btn-site"><i class="fa-solid fa-arrow-up-right-from-square"></i><span>Ana Site</span></a>
+      <a href="giris.html#surumler-ve-guncellemeler" class="custom-header-btn btn-changelog"><i class="fa-solid fa-code-branch"></i><span>Sürümler &amp; Yenilikler</span><span class="version-pill">v5.2</span></a>
+      <a href="https://github.com/btugecerken" target="_blank" class="custom-header-btn btn-github"><i class="fa-brands fa-github"></i><span>GitHub</span></a>
+    </div>
+  </header>
+
+  <div class="docs-container">
+    <aside class="docs-sidebar" id="docsSidebar"><div class="sidebar-inner" id="sidebarMenu"></div></aside>
+    <main class="docs-main">
+      <div class="docs-content-wrapper">
+        <article class="doc-body" id="docContent">
+        <section class="topic-section" id="yeni-blog-yazisi-ekleme">
+          <h1>Yeni Blog Yazısı Ekleme Prosedürü</h1>
+          <p>Sistemde yeni bir makale yayınlamak; bağımsız HTML dosyasının oluşturulması ve <code>blog.js</code> fihristine kaydedilmesi olmak üzere iki standart aşamadan oluşur.</p>
+
+          <h2>Aşama 1: Bağımsız HTML Sayfasını Hazırlama</h2>
+          <p>Kök dizindeki şablon makale dosyasını (örneğin <code>islam-metaetigi.html</code>) kopyalayın ve yeni bir isim verin (örneğin <code>bursa-kulliyeleri.html</code>). Dosya içinde aşağıdaki temel alanları güncelleyin:</p>
+          <ul>
+            <li><strong>Başlık ve Meta Etiketleri:</strong> <code>&lt;title&gt;</code> ve Open Graph (sosyal medya önizleme) etiketlerini düzenleyin.</li>
+            <li><strong>Makale Gövdesi:</strong> <code>&lt;article class="blog-content"&gt;</code> bloğu içerisine metin paragraflarını, ara başlıkları (H2, H3) ve kaynakçayı yerleştirin.</li>
+            <li><strong>Merkezi Bileşenler:</strong> Sayfanın en altındaki dinamik footer ve script çağrılarını eksiksiz bırakın:
+              <pre><code>&lt;footer class="site-footer" id="footer-placeholder"&gt;&lt;/footer&gt;
+&lt;script src="navbar.js" defer&gt;&lt;/script&gt;
+&lt;script src="script.js" defer&gt;&lt;/script&gt;</code></pre>
+            </li>
+          </ul>
+
+          <h2>Aşama 2: blog.js Fihristine Kayıt</h2>
+          <p>Yeni makalenin blog arama motorunda ve kategori listesinde çıkması için <code>blog.js</code> dosyasını açın. <code>blogPosts</code> dizisinin <strong>en başına (0. indeks)</strong> yeni nesneyi ekleyin:</p>
+          <pre><code>{
+  id: 35,                                            // Mevcut en büyük ID + 1
+  title: "Bursa Muradiye Külliyesi ve Mezar Taşı Kültürü", // Tam başlık
+  cat: "Tarih & Medeniyet",                          // Kategori sekmesi
+  date: "6 Kasım 2026",                              // Yayın tarihi
+  readTime: "10-12 dk okuma",
+  excerpt: "Erken Osmanlı döneminin son haziresinde taşların konuştuğu dil...", // Kart özeti
+  img: "muradiye-kulliyesi.jpg",                     // Kapak görseli
+  link: "bursa-kulliyeleri.html"                     // Fiziksel dosya adı
+},</code></pre>
+
+          <div class="note-box info">
+            <strong>Görsel Formatı:</strong> Kapak görsellerinin 16:9 oranında (önerilen 1200x675 px) ve WebP veya sıkıştırılmış JPG formatında olmasına dikkat edin; sayfa listeleme hızını doğrudan etkiler.
+          </div>
+        </section>
+
+        <section class="topic-section" id="yeni-etkinlik-ekleme">
+          <h1>Yeni Etkinlik ve Takvim Kaydı Ekleme</h1>
+          <p>Yeni bir panel, konferans, gezi veya atölye organize edildiğinde etkinlik listesini ve açılır takvim panosunu güncellemek için tek bir dosyada işlem yapılır: <code>etkinlikler.js</code>.</p>
+
+          <h2>Kayıt Prosedürü</h2>
+          <p><code>etkinlikler.js</code> dosyasındaki <code>events</code> dizisinin en tepesine yeni etkinliği tanımlayın:</p>
+          <pre><code>{
+  id: 39,
+  title: "Şehir ve Mimarlık Semineri",
+  academicYear: "2026/2027",                  // Aktif dönem: 2026/2027
+  category: "Seminer & Panel",
+  date: "18 Kasım 2026",                      // Etkinlik tarihi
+  time: "15:00",
+  location: "Mimar Sinan Yerleşkesi Turkuaz Salon", // Salon veya açık alan
+  desc: "Mimar Sinan'ın eserlerinde oran, estetik ve strüktür uyumu tahlil ediliyor.", // Tanıtım
+  tags: ["mimarlık", "seminer", "bursa"],     // Canlı arama etiketleri
+  link: "etkinlik-detay-39.html",             // Detay/Kayıt formu bağlantısı
+  isUpcoming: true                            // Takvim panosu vitrini için zorunlu bayrak
+},</code></pre>
+
+          <h2>Parametre Kuralları</h2>
+          <ul>
+            <li><strong>academicYear:</strong> Dönem sekmelerinin (<code>2026/2027</code>, <code>2025/2026</code>, <code>2024/2025</code>) doğru filtreleyebilmesi için yıl formatına sadık kalınmalıdır.</li>
+            <li><strong>isUpcoming:</strong> Eğer etkinlik henüz gerçekleşmediyse <code>true</code> bırakılmalıdır. Bu sayede sol alttaki takvim butonu açıldığında <em>"Yaklaşan Etkinlikler"</em> şeridine otomatik çekilir. Etkinlik tamamlandığında bu değer <code>false</code> yapılmalıdır.</li>
+          </ul>
+        </section>
+
+        <section class="topic-section" id="yeni-dergi-sayisi-ekleme">
+          <h1>Yeni Dergi Sayısı Yükleme Prosedürü</h1>
+          <p>Topluluğun süreli yayınlarından biri (Culture, Mahya veya Account Originals) matbaadan/grafikten çıktığında dergilik portalına eklemek için aşağıdaki adımlar takip edilir:</p>
+
+          <h2>1. Dosyaların Sunucuya Yüklenmesi (FileZilla / SCP)</h2>
+          <ul>
+            <li><strong>PDF Dosyası:</strong> <code>BTU_Gecerken_Culture_2.pdf</code> formatında adlandırılıp <code>/var/www/btugecerken/</code> dizinine yüklenir. (Dosya isminde Türkçe karakter ve boşluk yerine alt tire kullanılması tavsiye edilir).</li>
+            <li><strong>Kapak Görseli:</strong> Derginin ilk sayfasının yüksek çözünürlüklü PNG kapağı (<code>BTU_Gecerken_Culture_2.png</code>) aynı dizine aktarılır.</li>
+          </ul>
+
+          <h2>2. dergilik.js Kataloğunu Güncelleme</h2>
+          <p><code>dergilik.js</code> dosyasını açıp <code>magazineDatabase</code> dizisinin başına yeni sayıyı kaydedin:</p>
+          <pre><code>{
+  id: "culture-2",
+  title: "BTÜ Geçerken Culture - Sayı 2",
+  series: "BTÜ Geçerken Culture",       // Seri: BTÜ Geçerken Culture | Mahya Dergisi
+  issue: "Sayı 2",
+  date: "Kasım 2026",
+  period: "Her Ayın 15'i",               // Periyot etiketi
+  desc: "Yapay zekâ felsefesi, İslam mimarisinde taç kapılar ve şehir sosyolojisi.", // Sayı özeti
+  cover: "BTU_Gecerken_Culture_2.png",  // Kapak dosyası adı
+  pdfUrl: "BTU_Gecerken_Culture_2.pdf", // Okunacak PDF dosyası adı
+  badge: "YENİ YAYIN",                  // Rozet etiketi
+  featured: true                         // Öne çıkan ana dergi olarak ayarlansın mı?
+},</code></pre>
+
+          <h2>3. Test ve Doğrulama</h2>
+          <p>Yükleme sonrası tarayıcıdan <code>https://btugecerken.com/dergilik.html</code> sayfasına girip dergi kartındaki <em>"Hemen Oku"</em> butonuna basın. URL'in <code>pdf-viewer.html?file=BTU_Gecerken_Culture_2.pdf</code> şeklinde açıldığını ve çizim katmanının sorunsuz yüklendiğini doğrulayın.</p>
+        </section>
+
+        <section class="topic-section" id="yasal-uyari-guncelleme-rehberi">
+          <h1>Yasal Uyarı & KVKK Güncelleme Rehberi</h1>
+          <p>BTÜ Geçerken ekosisteminde yeni bir interaktif modül (örneğin yeni bir yapay zekâ aracı, veri toplayan form veya dosya analiz sistemi) devreye alındığında, <code>yasal-uyari.html</code> sayfasının ve KVKK şartlarının güncellenmesi zorunludur.</p>
+
+          <h2>1. Referans Kaynak: Açık Kaynak legal-templates Reposu</h2>
+          <p>Hukuki terminolojiyi ve uluslararası standartları doğru oturtmak için açık kaynaklı <strong>legal-templates</strong> deposundaki şablonlar rehber olarak kullanılır:</p>
+          <ul>
+            <li><strong>terms-of-use (Kullanım Şartları):</strong> Hizmet sorumluluk sınırları (Limitation of Liability), garanti reddi (As-Is prensibi) ve fikri mülkiyet (IP) maddeleri için temel alınır.</li>
+            <li><strong>privacy-policy-gdpr & dpa-global (Veri İşleme & Gizlilik):</strong> Kullanıcı verilerinin nerede işlendiği, üçüncü taraflara aktarım yasakları ve kullanıcı hakları (KVKK Madde 11 / GDPR) için referans alınır.</li>
+            <li><strong>cookie-notice (Çerez Politikası):</strong> Reklam çerezi kullanılmadığı, yalnızca teknik zorunlu çerezler ile <code>localStorage</code> / <code>sessionStorage</code> anahtarlarının tutulduğunu belgelemek için kullanılır.</li>
+          </ul>
+
+          <h2>2. Güncelleme Adımları (Adım Adım Prosedür)</h2>
+
+          <h3>Adım 1: Etkilenen Ekosistem Modülünü Belirleyin</h3>
+          <p>Yasal metinde ilgili bölümün altına yeni modüle dair teknik sınırları yazın. Örneğin:</p>
+          <ul>
+            <li><strong>Yapay Zekâ (Farabi / BTÜ AI):</strong> Üretilen çıktıların resmi/akademik bağlayıcılığı olmadığı, kullanıcı şifresi veya özel veri girilmemesi gerektiği vurgulanmalıdır.</li>
+            <li><strong>Dergilik & PDF Viewer:</strong> Kullanıcının tuvalde yaptığı çizimlerin sunucuya gitmediği, yerel bellekte (Canvas cache) kaldığı ve indirilen notlu dergilerin ticari amaçla çoğaltılamayacağı belirtilmelidir.</li>
+            <li><strong>Dokümantasyon (Docs):</strong> Açık mimari kılavuzların topluluk projelerinde kaynak gösterilerek kullanılabileceği kaydedilmelidir.</li>
+            <li><strong>Lab Platformu:</strong> İstemci araçlarının sıfır veri kaydı prensibiyle çalıştığı, video indirme işlemlerinin sunucuda yalnızca geçici (15 dakika) tutulduğu belirtilmelidir.</li>
+          </ul>
+
+          <h3>Adım 2: Tarih ve Meta Alanlarını Yenileyin</h3>
+          <p><code>yasal-uyari.html</code> dosyasının başlığındaki rozet tarihini ve footer telif yılını güncelleyin:</p>
+          <pre><code>&lt;div class="legal-meta"&gt;
+  &lt;span&gt;&lt;i class="far fa-calendar-check"&gt;&lt;/i&gt; Son Güncelleme: 07.11.2026&lt;/span&gt;
+&lt;/div&gt;</code></pre>
+
+          <h3>Adım 3: İletişim ve Veri Sorumlusu İrtibatını Doğrulayın</h3>
+          <p>Kullanıcıların KVKK hakları kapsamındaki silme ve sorgulama talepleri için yönlendirilen e-posta adresinin (<code>info@btugecerken.com</code>) ve iletişim kartının yerinde olduğunu kontrol edin.</p>
+
+          <h3>Adım 4: Canlıya Alma ve Nginx Önbellek Testi</h3>
+          <p>Dosyayı FileZilla ile <code>/var/www/btugecerken/yasal-uyari.html</code> dizinine yükleyin. Tarayıcıda <code>Ctrl + F5</code> yaparak güncel tarihin ve maddelerin ekrana eksiksiz yansıdığını doğrulayın.</p>
+        </section>
+        </article>
+
+        <nav class="doc-pagination">
+          <a href="yapay-zeka.html" class="pag-btn prev"><span class="pag-label"><i class="fa-solid fa-arrow-left"></i> Önceki Bölüm</span><span class="pag-title">5. Yapay Zekâ ve Dify Ekosistemi</span></a>
+
+        </nav>
+      </div>
+    </main>
+  </div>
+
+  <script src="docs-nav.js"></script>
+  <script src="docs.js"></script>
+</body>
+</html>

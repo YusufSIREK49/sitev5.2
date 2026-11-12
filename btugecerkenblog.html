@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="tr">
+<head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>BTÜ Geçerken Topluluğu | Blog</title>
+  
+  <link rel="icon" href="https://btugecerken.com/logogecerken-Photoroom (1).ico">
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Syne:wght@400;600;700;800&family=Noto+Serif+TR:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet"/>
+  
+  <link rel="stylesheet" href="navbar.css">
+  <link rel="stylesheet" href="style.css?v=1.2">
+  <style>
+    .category-bar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      justify-content: center;
+      margin-bottom: 35px;
+    }
+
+    @media (max-width: 768px) {
+      .category-bar {
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        justify-content: flex-start;
+        padding: 5px 15px 15px;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none; /* Firefox scrollbar gizle */
+      }
+      .category-bar::-webkit-scrollbar {
+        display: none; /* Chrome & Safari scrollbar gizle */
+      }
+      .cat-btn {
+        flex-shrink: 0; /* Butonların ezilip daralmasını engelle */
+        white-space: nowrap;
+      }
+    }
+  </style>
+</head>
+<body class="blog-chatbot">
+
+<header class="custom-navbar" id="navbar-placeholder">
+  <!-- Navbar JavaScript tarafından otomatik yüklenecektir -->
+</header>
+
+<main>
+  <!-- BLOG HERO -->
+  <section class="blog-hero">
+    <div class="section-inner">
+      <div class="section-label" data-reveal>YAZILAR & MAKALELER</div>
+      <h1 class="hero-title" data-reveal>BTÜ Geçerken <em>Blog</em></h1>
+      <p class="hero-subtitle" data-reveal data-delay="1">Bilim, kültür, sanat ve daha fazlası</p>
+    </div>
+  </section>
+
+  <!-- BLOG İÇERİK KAPSAYICISI -->
+  <div class="container blog-container">
+	  
+    <!-- Dinamik Kategori Filtre Butonları (blog.js tarafından üretilir) -->
+    <div class="category-bar" id="categoryBar" data-reveal></div>
+
+    <!-- Blog Kartları Grid Alanı -->
+    <div class="blog-grid" id="blogGrid"></div>
+
+    <!-- Sayfalama (Pagination) -->
+    <div class="pagination-container" id="pagination"></div>
+
+  </div>
+</main>
+
+<!-- Dinamik Footer Alanı -->
+<footer id="footer-placeholder"></footer>
+
+<!-- SCRIPTLER -->
+<script src="navbar.js"></script>
+<script src="script.js"></script>
+<script src="blog.js?v=1.2"></script>
+</body>
+</html>

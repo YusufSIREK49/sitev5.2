@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>İçerik ve Yayıncılık Motorları | BTÜ Geçerken Docs</title>
+  <meta name="description" content="Blog, etkinlik takvimi, merkezi footer ve topluluk organizasyonu.">
+  <link rel="icon" href="https://btugecerken.com/logogecerken-Photoroom (1).ico">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="docs.css">
+</head>
+<body data-page="icerik.html">
+
+  <header class="docs-header">
+    <div class="header-left">
+      <button id="sidebarToggle" class="sidebar-toggle-btn" aria-label="Menü"><i class="fa-solid fa-bars"></i></button>
+      <a href="index.html" class="docs-brand">
+        <img src="https://cdn1.site-media.eu/images/114/22934790/GeerkenLogo-Photoroom-82aMDiSMSNM52OeysD1XRQ-EgWrwxwoIVNv8WhyNw0qWA.png" alt="BTÜ Geçerken Logo">
+        <div class="brand-text"><span class="brand-title">BTÜ GEÇERKEN</span><span class="brand-sub">DOCS</span></div>
+      </a>
+    </div>
+    <div class="header-center">
+      <div class="search-box">
+        <i class="fa-solid fa-magnifying-glass"></i>
+        <input type="text" id="docSearchInput" placeholder="Dokümantasyonda ara... (Ctrl + K)">
+      </div>
+    </div>
+    <div class="header-actions">
+      <a href="https://btugecerken.com" target="_blank" class="custom-header-btn btn-site"><i class="fa-solid fa-arrow-up-right-from-square"></i><span>Ana Site</span></a>
+      <a href="giris.html#surumler-ve-guncellemeler" class="custom-header-btn btn-changelog"><i class="fa-solid fa-code-branch"></i><span>Sürümler &amp; Yenilikler</span><span class="version-pill">v5.2</span></a>
+      <a href="https://github.com/btugecerken" target="_blank" class="custom-header-btn btn-github"><i class="fa-brands fa-github"></i><span>GitHub</span></a>
+    </div>
+  </header>
+
+  <div class="docs-container">
+    <aside class="docs-sidebar" id="docsSidebar"><div class="sidebar-inner" id="sidebarMenu"></div></aside>
+    <main class="docs-main">
+      <div class="docs-content-wrapper">
+        <article class="doc-body" id="docContent">
+        <section class="topic-section" id="blog-sistemi-mimarisi">
+          <h1>Blog Motoru ve Dinamik Veri Fihristi</h1>
+          <p>BTÜ Geçerken blog altyapısı; tek bir JavaScript veri modelinden (<code>blog.js</code>) beslenen, arama ve filtrelemeyi istemci tarafında (Client-Side) yürüten, ancak her makaleyi bağımsız bir statik HTML sayfası olarak sunan hibrit bir mimariye sahiptir.</p>
+
+          <div class="note-box info">
+            <strong>Neden Bağımsız HTML Dosyaları?</strong> Arama motoru optimizasyonu (SEO), sosyal medya önizlemeleri (Open Graph meta etiketleri) ve akademik atıf kalıcılığı için her makale kendine ait fiziksel bir <code>.html</code> dosyasına sahiptir. <code>blog.js</code> ise bu makalelerin yalnızca dizinini (metadata) tutarak arşiv ve arama motoru işlevi görür.
+          </div>
+
+          <h2>1. Veri Şeması (blog.js)</h2>
+          <p>Her makale nesnesi aşağıdaki katı tip yapısına uygun olarak <code>blogPosts</code> dizisine kaydedilir:</p>
+          <pre><code>const blogPosts = [
+  {
+    id: 34,                                      // Benzersiz tamsayı kimliği
+    title: "İslam Metaetiği: İyi-Kötü Ayrımı Nasıl Kurulur?", // Tam başlık
+    cat: "İslam Felsefesi",                      // Filtreleme kategorisi
+    date: "7 Ağustos 2026",                      // Yayınlanma tarihi
+    readTime: "18-22 dk okuma",                  // Tahmini okuma süresi
+    excerpt: "İslam düşüncesinde ahlaki eylemler nasıl değerlendirilir?...", // Kart özeti
+    img: "islam-metaetigi.jpg",                  // Kapak görseli dosya adı
+    link: "islam-metaetigi.html"                 // Hedef fiziksel HTML rotası
+  }
+];</code></pre>
+
+          <h2>2. İstemci Taraflı Sayfalama ve Arama Algoritması</h2>
+          <p>Blog motoru (<code>btugecerkenblog.html</code>) yüklendiğinde şu işlem basamaklarını çalıştırır:</p>
+          <ul>
+            <li><strong>Filtreleme Hattı:</strong> Seçili kategori (örn: <em>"Sanat Tarihi"</em> veya <em>"Hepsi"</em>) ve arama kutusuna yazılan anahtar kelime aynı anda değerlendirilir. Arama işlemi hem <code>title</code> hem de <code>excerpt</code> üzerinde küçük/büyük harf duyarsız (case-insensitive) regex ile taranır.</li>
+            <li><strong>Sayfalama Hesabı:</strong> Sayfa başına 12 makale (<code>postsPerPage = 12</code>) sınırıyla toplam sayfa sayısı dinamik hesaplanır:
+              <pre><code>const totalPages = Math.ceil(filteredPosts.length / postsPerPage);
+const startIndex = (currentPage - 1) * postsPerPage;
+const paginatedItems = filteredPosts.slice(startIndex, startIndex + postsPerPage);</code></pre>
+            </li>
+            <li><strong>DOM Enjeksiyonu:</strong> Yalnızca o sayfaya ait 12 kartlık HTML şablonu oluşturulup <code>#blogGrid</code> konteynerine basılır. Bu sayede yüzlerce makale olsa dahi tarayıcı render performansı düşmez.</li>
+          </ul>
+        </section>
+
+        <section class="topic-section" id="etkinlik-takvimi-mimarisi">
+          <h1>Etkinlik Arşivi ve Takvim Panosu Mimarisi</h1>
+          <p>Topluluğun kurulduğu günden bu yana gerçekleştirdiği tüm paneller, atölyeler, geziler ve hasbihal programları <code>etkinlikler.js</code> veri tabanı üzerinden arşivlenir.</p>
+
+          <h2>1. Etkinlik Veri Modeli</h2>
+          <pre><code>const events = [
+  {
+    id: 38,
+    title: "Medeniyet ve Şehir Söyleşileri",
+    academicYear: "2026/2027",                  // Dönem filtresi anahtarı
+    category: "Seminer & Panel",
+    date: "14 Kasım 2026",                      // Etkinlik tarihi
+    time: "14:30",
+    location: "Mimar Sinan Yerleşkesi A Blok",  // Konum bilgisi
+    desc: "Bursa'nın kadim mimarisi üzerine...", // Tanıtım metni
+    tags: ["mimari", "tarih", "bursa"],         // Canlı arama etiketleri
+    link: "etkinlik-detay-38.html",             // Detay veya kayıt sayfası
+    isUpcoming: true                            // Yaklaşan etkinlik durumu
+  }
+];</code></pre>
+
+          <h2>2. Akademik Dönem Taksonomisi</h2>
+          <p>Etkinlikler üniversite takvimine paralel olarak akademik dönemlere göre indekslenir:</p>
+          <ul>
+            <li><code>2026/2027</code>: Aktif akademik yıl etkinlikleri.</li>
+            <li><code>2025/2026</code>: Geçmiş dönem arşivi.</li>
+            <li><code>2024/2025</code>: Kuruluş yılı faaliyetleri ve saha projeleri.</li>
+          </ul>
+
+          <h2>3. Modal Takvim Panosu ve Faaliyet Çizelgesi</h2>
+          <p>Sayfada yer alan yüzen takvim butonu, arka planı karartarak etkileşimli bir takvim penceresi açar:</p>
+          <ul>
+            <li><strong>Yaklaşan Programlar Bölümü:</strong> <code>isUpcoming: true</code> bayrağına sahip etkinlikleri otomatik olarak üst şeride çeker.</li>
+            <li><strong>Yıllık Faaliyet PDF İndirme:</strong> Topluluğun üniversite Sağlık, Kültür ve Spor Daire Başkanlığı'na (SKSDB) sunduğu resmi faaliyet planını tek tıkla indirilebilir formatta sunar.</li>
+          </ul>
+        </section>
+
+        <section class="topic-section" id="merkezi-footer-mimarisi">
+          <h1>Merkezi Dinamik Footer Motoru</h1>
+          <p>Ekosistem genelinde yer alan onlarca bağımsız blog ve etkinlik sayfasında navigasyon menülerinin, yasal uyarı linklerinin ve sosyal medya bağlantılarının tek bir merkezden yönetilmesi için <strong>dinamik enjeksiyon algoritması</strong> geliştirilmiştir.</p>
+
+          <div class="note-box info">
+            <strong>Sıfır Ek Dosya İlkesi:</strong> Sayfaların açılışında ekstra bir HTTP isteği oluşturmamak adına footer motoru bağımsız bir <code>footer.js</code> yerine, tüm sayfalarda zaten yüklü olan çekirdek <code>script.js</code> içerisine yerleştirilmiştir.
+          </div>
+
+          <h2>1. Dizin ve Kök Yol Çözümleme Algoritması (basePath)</h2>
+          <p>Fiziksel sayfalar kimi zaman ana dizinde (<code>/index.html</code>), kimi zaman alt kategorilerde bulunabilir. Bağlantıların kırılmasını önlemek için script şu mantıkla dinamik ön ek üretir:</p>
+          <pre><code>// URL yolundaki klasör derinliğini ölçer
+const isSubFolder = window.location.pathname.split("/").filter(Boolean).length > 1;
+const basePath = isSubFolder ? "/" : "";
+
+// Üretilen link örneği:
+// Kök dizinde: "dergilik.html"
+// Alt dizinde: "/dergilik.html"</code></pre>
+
+          <h2>2. Hedef Yakalama ve Enjeksiyon</h2>
+          <p>Motor sayfa yüklendiğinde DOM üzerinde sırasıyla <code>#footer-placeholder</code> id'li veya <code>footer.site-footer</code> sınıflı elementi arar; bulduğunda kurumsal marka sütununu, ekosistem alt alan adlarını (Farabi AI, Docs, Lab) ve iletişim bloklarını dinamik olarak enjekte eder:</p>
+          <pre><code>&lt;!-- Sayfa geliştiricisinin tek yazması gereken HTML satırı: --&gt;
+&lt;footer class="site-footer" id="footer-placeholder"&gt;&lt;/footer&gt;
+&lt;script src="navbar.js" defer&gt;&lt;/script&gt;
+&lt;script src="script.js" defer&gt;&lt;/script&gt;</code></pre>
+        </section>
+
+        <section class="topic-section" id="ekibimiz-ve-yonetim">
+          <h1>Topluluk Organizasyonu ve Birimler</h1>
+          <p>BTÜ Geçerken Topluluğu; akademik, kültürel ve teknik üretimi sürdürebilmek adına modüler ve iş bölümüne dayalı bir teşkilat yapısıyla yönetilir.</p>
+
+          <h2>1. Yönetim Kurulu</h2>
+          <ul>
+            <li><strong>Topluluk Başkanı:</strong> Üniversite yönetimi, SKSDB ve dış paydaşlarla resmi koordinasyon; topluluk vizyonunun korunması.</li>
+            <li><strong>Başkan Yardımcıları:</strong> Birimler arası senkronizasyon, haftalık planlama ve idari takip.</li>
+          </ul>
+
+          <h2>2. İhtisas Ekipleri</h2>
+          <ul>
+            <li><strong>Proje ve Ar-Ge Ekibi:</strong> Web platformlarının (btugecerken, Farabi AI, Docs, Lab) geliştirilmesi, Nginx/Linux sunucu yönetimi, Dify yapay zekâ entegrasyonları ve akademik araştırma projeleri.</li>
+            <li><strong>Sosyal Medya ve Tanıtım Ekibi:</strong> Dijital mecralar için görsel/video tasarımı, etkinlik duyuruları, YouTube kanal yönetimi ve kitle iletişimi.</li>
+            <li><strong>Organizasyon ve Lojistik Ekibi:</strong> Konferans salonu koordinasyonu, kampüs izinleri, ikram ve saha etkinliklerinin icrası.</li>
+            <li><strong>Yayın ve Editör Ekibi:</strong> Dergilik sayıları (Mahya, Culture), blog tahlil yazıları ve yayın kurulunun yönetimi.</li>
+          </ul>
+        </section>
+        </article>
+
+        <nav class="doc-pagination">
+          <a href="giris.html" class="pag-btn prev"><span class="pag-label"><i class="fa-solid fa-arrow-left"></i> Önceki Bölüm</span><span class="pag-title">1. Giriş, Mimari ve Sürümler</span></a>
+          <a href="medya-lab.html" class="pag-btn next"><span class="pag-label">Sonraki Bölüm <i class="fa-solid fa-arrow-right"></i></span><span class="pag-title">3. Medya ve Lab Ekosistemi</span></a>
+        </nav>
+      </div>
+    </main>
+  </div>
+
+  <script src="docs-nav.js"></script>
+  <script src="docs.js"></script>
+</body>
+</html>

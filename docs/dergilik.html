@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dergilik ve PDF Motoru | BTÜ Geçerken Docs</title>
+  <meta name="description" content="Dergi kataloğu, URL protokolü ve interaktif PDF notlama motoru.">
+  <link rel="icon" href="https://btugecerken.com/logogecerken-Photoroom (1).ico">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="docs.css">
+</head>
+<body data-page="dergilik.html">
+
+  <header class="docs-header">
+    <div class="header-left">
+      <button id="sidebarToggle" class="sidebar-toggle-btn" aria-label="Menü"><i class="fa-solid fa-bars"></i></button>
+      <a href="index.html" class="docs-brand">
+        <img src="https://cdn1.site-media.eu/images/114/22934790/GeerkenLogo-Photoroom-82aMDiSMSNM52OeysD1XRQ-EgWrwxwoIVNv8WhyNw0qWA.png" alt="BTÜ Geçerken Logo">
+        <div class="brand-text"><span class="brand-title">BTÜ GEÇERKEN</span><span class="brand-sub">DOCS</span></div>
+      </a>
+    </div>
+    <div class="header-center">
+      <div class="search-box">
+        <i class="fa-solid fa-magnifying-glass"></i>
+        <input type="text" id="docSearchInput" placeholder="Dokümantasyonda ara... (Ctrl + K)">
+      </div>
+    </div>
+    <div class="header-actions">
+      <a href="https://btugecerken.com" target="_blank" class="custom-header-btn btn-site"><i class="fa-solid fa-arrow-up-right-from-square"></i><span>Ana Site</span></a>
+      <a href="giris.html#surumler-ve-guncellemeler" class="custom-header-btn btn-changelog"><i class="fa-solid fa-code-branch"></i><span>Sürümler &amp; Yenilikler</span><span class="version-pill">v5.2</span></a>
+      <a href="https://github.com/btugecerken" target="_blank" class="custom-header-btn btn-github"><i class="fa-brands fa-github"></i><span>GitHub</span></a>
+    </div>
+  </header>
+
+  <div class="docs-container">
+    <aside class="docs-sidebar" id="docsSidebar"><div class="sidebar-inner" id="sidebarMenu"></div></aside>
+    <main class="docs-main">
+      <div class="docs-content-wrapper">
+        <article class="doc-body" id="docContent">
+        <section class="topic-section" id="dergilik-katalog-yapisi">
+          <h1>Dergilik Kataloğu ve URL Parametre Protokolü</h1>
+          <p>BTÜ Geçerken Dergilik platformu (<code>dergilik.html</code>); topluluğun akademik, kültürel ve sanatsal süreli yayınlarını sergileyen dijital kütüphane vitrinidir.</p>
+
+          <div class="note-box info">
+            <strong>Tek Sayfa - Çoklu Yayın Prensibi:</strong> Her dergi sayısı için ayrı ayrı HTML sayfaları üretilmez. Sistemde yalnızca tek bir okuyucu arayüzü (<code>pdf-viewer.html</code>) bulunur; açılmak istenen derginin dosya yolu ve başlığı URL arama parametreleri (Query Parameters) ile okuyucuya aktarılır.
+          </div>
+
+          <h2>1. Yayın Veritabanı Şeması (dergilik.js)</h2>
+          <p>Yayınlanan her sayı <code>magazineDatabase</code> dizisine aşağıdaki nesne formatıyla kaydedilir:</p>
+          <pre><code>const magazineDatabase = [
+  {
+    id: "culture-1",
+    title: "BTÜ Geçerken Culture - Sayı 1",
+    series: "BTÜ Geçerken Culture",       // Seri grubu (Culture, Mahya, Account Originals)
+    issue: "Sayı 1",
+    date: "Ekim 2026",
+    period: "Her Ayın 15'i",               // Yayın periyodu
+    desc: "Mitoloji, İlk Yerleşimler, Blokzincir ve Empresyonizm dosyaları...",
+    cover: "BTU_Gecerken_Culture_1.png",  // Kapak görseli
+    pdfUrl: "BTU_Gecerken_Culture_1.pdf", // Sunucudaki fiziksel PDF dosyası
+    badge: "YENİ YAYIN",                  // Vitrin rozeti
+    featured: true                         // Öne çıkan ana vitrin yayını
+  }
+];</code></pre>
+
+          <h2>2. Okuyucu Başlatma Protokolü</h2>
+          <p>Kullanıcı dergilik sayfasında bir derginin <em>"Hemen Oku"</em> butonuna bastığında tarayıcı şu URL yapısını üretir:</p>
+          <pre><code>pdf-viewer.html?file=BTU_Gecerken_Culture_1.pdf&title=BTÜ%20Geçerken%20Culture%20-%20Sayı%201</code></pre>
+          <p><code>pdf-viewer.js</code> motoru sayfa açıldığı anda <code>window.location.search</code> parametrelerini çözümler, üst başlığı günceller ve belirtilen PDF dosyasını asenkron olarak indirmeye başlar.</p>
+        </section>
+
+        <section class="topic-section" id="pdf-cizim-ve-not-motoru">
+          <h1>İnteraktif Okuyucu, Çift Tuval ve Notlu PDF Derleme</h1>
+          <p><code>pdf-viewer.js</code>, basit bir PDF görüntüleyicisinden öte; tablet, telefon (dokunmatik) ve grafik tablet (stylus) uyumlu, tarayıcı içi çalışan eksiksiz bir dijital not alma motorudur.</p>
+
+          <h2>1. Çift Tuval Mimarisi (Dual Canvas Pattern)</h2>
+          <p>Çizimlerin orijinal PDF metinlerini ve vektörlerini bozmasını engellemek amacıyla iki katmanlı tuval hiyerarşisi uygulanmıştır:</p>
+
+          <pre><code>+-------------------------------------------------------------+
+|  ÜST KATMAN: #drawCanvas (HTML5 Canvas - Şeffaf Zemin)     |  <-- Kullanıcının Kalem/Silgi Çizimleri
++-------------------------------------------------------------+
+|  ALT KATMAN: #pdfCanvas  (PDF.js Tarafından Render Edilen)  |  <-- Orijinal Vektörel PDF Sayfası
++-------------------------------------------------------------+</code></pre>
+
+          <ul>
+            <li><strong>Alt Tuval (<code>#pdfCanvas</code>):</strong> Mozilla'nın açık kaynak <code>pdf.js</code> kütüphanesi tarafından ilgili sayfanın yüksek DPI (Device Pixel Ratio) ile çizildiği salt-okunur katmandır.</li>
+            <li><strong>Üst Tuval (<code>#drawCanvas</code>):</strong> Kullanıcının serbest el çizimlerini, işaretlemelerini ve fosforlu vurgularını yakalayan şeffaf etkileşim katmanıdır.</li>
+          </ul>
+
+          <h2>2. Fırça Modları ve Kompozisyon Algoritmaları</h2>
+          <p>Tuval çizim motoru üç farklı araç moduna sahiptir:</p>
+          <ul>
+            <li><strong>Tükenmez Kalem:</strong> <code>globalCompositeOperation = 'source-over'</code> modunda, kullanıcının seçtiği renk ve kalınlıkta opak vektörel çizgiler çizer.</li>
+            <li><strong>Fosforlu Kalem (Highlighter):</strong> Yarı saydam alfa kanalı (<code>rgba(r, g, b, 0.4)</code>) ve <code>source-over</code> kompozisyonu ile metinlerin üzerini kapatmadan altındaki yazının okunmasını sağlar.</li>
+            <li><strong>Piksel Silgisi:</strong> <code>globalCompositeOperation = 'destination-out'</code> modu ile PDF sayfasına dokunmadan yalnızca üstteki çizim katmanının piksellerini saydamlaştırır.</li>
+          </ul>
+
+          <h2>3. Sayfa Geçiş Önbelleği (drawingCache)</h2>
+          <p>Kullanıcı sayfalar arasında ileri/geri gezinirken çizimlerin silinmesini önlemek için bellek içi önbellekleme uygulanır:</p>
+          <pre><code>// Sayfadan ayrılırken mevcut çizimi kaydet:
+function saveCurrentPageDrawing() {
+  drawingCache[currentPageNum] = drawCanvas.toDataURL('image/png');
+}
+
+// Yeni sayfaya geçildiğinde varsa eski çizimi tuvale geri bas:
+function restorePageDrawing(pageNum) {
+  if (drawingCache[pageNum]) {
+    const img = new Image();
+    img.onload = () => drawCtx.drawImage(img, 0, 0);
+    img.src = drawingCache[pageNum];
+  }
+}</code></pre>
+
+          <h2>4. PDF-Lib ile Çizimleri Birleştirip İndirme (Export Pipeline)</h2>
+          <p>Kullanıcı <em>"Çizimlerle İndir"</em> butonuna bastığında hiçbir sunucu işlemi gerekmez; işlem tamamen kullanıcının tarayıcısında (Client-Side) gerçekleşir:</p>
+          <ol>
+            <li>Orijinal PDF'in ham baytları (ArrayBuffer) <strong>pdf-lib</strong> kütüphanesine yüklenir.</li>
+            <li><code>drawingCache</code> taranır; kullanıcının çizim yaptığı her sayfa için PNG verisi <code>pdfDoc.embedPng()</code> ile PDF nesnesine gömülür.</li>
+            <li>Gömülen çizim katmanı ilgili PDF sayfasının üzerine tam sayfa boyutunda bindirilir.</li>
+            <li>Derlenen yeni PDF dosyası <code>Blob</code> formatına dönüştürülüp kullanıcının cihazına otomatik olarak indirilir.</li>
+          </ol>
+        </section>
+        </article>
+
+        <nav class="doc-pagination">
+          <a href="medya-lab.html" class="pag-btn prev"><span class="pag-label"><i class="fa-solid fa-arrow-left"></i> Önceki Bölüm</span><span class="pag-title">3. Medya ve Lab Ekosistemi</span></a>
+          <a href="yapay-zeka.html" class="pag-btn next"><span class="pag-label">Sonraki Bölüm <i class="fa-solid fa-arrow-right"></i></span><span class="pag-title">5. Yapay Zekâ ve Dify Ekosistemi</span></a>
+        </nav>
+      </div>
+    </main>
+  </div>
+
+  <script src="docs-nav.js"></script>
+  <script src="docs.js"></script>
+</body>
+</html>

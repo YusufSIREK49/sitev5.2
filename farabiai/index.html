@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <title>Farabi AI | BTÜ Geçerken Topluluğu</title>
+  
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="https://btugecerken.com/farabiai-Photoroom.png">
+  <link rel="apple-touch-icon" href="https://btugecerken.com/farabiai-Photoroom.png">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Noto+Serif+TR:wght@300;400;600;700&family=Syne:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="style.css?v=7.1">
+</head>
+<body>
+
+  <!-- ======================================================================
+       SİTE GİRİŞ ANİMASYONU (BLUEPRINT LOADER)
+       ====================================================================== -->
+  <div id="siteLoader" class="farabi-loader-screen">
+    <div class="blueprint-stage">
+      <svg class="blueprint-svg" viewBox="0 0 420 420">
+        <!-- Yatay ve Dikey Ana Eksenler -->
+        <line x1="-30" y1="210" x2="450" y2="210" class="bp-axis-main" />
+        <line x1="210" y1="-30" x2="210" y2="450" class="bp-axis-main" />
+
+        <!-- Çapraz Kılavuz Çizgileri -->
+        <line x1="40" y1="40" x2="380" y2="380" class="bp-axis-sub" />
+        <line x1="40" y1="380" x2="380" y2="40" class="bp-axis-sub" />
+
+        <!-- Merkez Geometrik Çemberleri -->
+        <circle cx="210" cy="210" r="185" fill="none" class="bp-ring-major" />
+        <circle cx="210" cy="210" r="135" fill="none" class="bp-ring-minor" />
+
+        <!-- Asimetrik Teğet Kılavuz Çemberleri -->
+        <circle cx="140" cy="140" r="55" fill="none" class="bp-circle-tangent-1" />
+        <circle cx="290" cy="260" r="42" fill="none" class="bp-circle-tangent-2" />
+        <circle cx="120" cy="280" r="28" fill="none" class="bp-circle-tangent-1" />
+
+        <!-- Eksen Ucu İmleri -->
+        <polygon points="210,20 214,28 210,36 206,28" class="bp-marker" />
+        <polygon points="210,384 214,392 210,400 206,392" class="bp-marker" />
+        <polygon points="20,210 28,214 36,210 28,206" class="bp-marker" />
+        <polygon points="384,210 392,214 400,210 392,206" class="bp-marker" />
+      </svg>
+
+      <!-- Logo Amblemi -->
+      <div class="farabi-logo-frame">
+        <img src="https://btugecerken.com/farabiai-Photoroom.png" alt="" class="farabi-logo-img" />
+      </div>
+    </div>
+  </div>
+
+  <div class="app-layout">
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+    <!-- SOL PANEL (SIDEBAR) -->
+    <aside class="chat-sidebar" id="sidebar">
+      <div class="sidebar-header">
+        <div class="sidebar-brand">
+          <img id="sidebarLogo" src="https://btugecerken.com/farabiai-Photoroom.png" alt="Farabi AI">
+          <span class="sidebar-title" id="sidebarTitle">Farabi AI</span>
+        </div>
+        <button class="sidebar-close-btn" id="sidebarCloseBtn" title="Menüyü Kapat">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+
+      <div class="sidebar-actions">
+        <button class="btn-new-chat" onclick="createNewSession()">
+          <i class="fa-solid fa-pen-to-square"></i>
+          <span>Yeni sohbet</span>
+        </button>
+      </div>
+
+      <div class="sidebar-section-title">Geçmiş Sohbetler</div>
+      <div class="history-list" id="historyList"></div>
+
+      <div class="sidebar-footer">
+        <a href="https://btugecerken.com" class="portal-return-link" target="_blank" rel="noopener noreferrer">
+          <i class="fa-solid fa-arrow-up-right-from-square"></i>
+          <span>btugecerken.com</span>
+        </a>
+      </div>
+    </aside>
+
+    <!-- ANA ALAN -->
+    <main class="chat-main-area">
+      <header class="chat-topbar">
+        <div class="topbar-left">
+          <button class="sidebar-toggle-btn" id="sidebarToggleBtn" title="Menü">
+            <i class="fa-solid fa-bars"></i>
+          </button>
+          
+          <div class="model-switcher-wrap">
+            <div class="gemini-model-badge" id="modelBadge" onclick="toggleModelDropdown(event)">
+              <span class="gemini-model-title" id="activeModelTitle">Farabi AI</span>
+              <span class="gemini-model-sub" id="activeModelSub">Beta</span>
+              <i class="fa-solid fa-chevron-down gemini-model-arrow"></i>
+            </div>
+
+            <div class="model-dropdown-menu" id="modelDropdownMenu">
+              <div class="model-dropdown-item active" id="item-farabi" onclick="selectModel('farabi')">
+                <div class="model-item-info">
+                  <span class="model-item-name">Farabi AI <span class="badge-mini">Beta</span></span>
+                  <span class="model-item-desc">Felsefi ve analitik düşünce asistanı</span>
+                </div>
+                <i class="fa-solid fa-check model-item-check"></i>
+              </div>
+
+              <div class="model-dropdown-item" id="item-btu" onclick="selectModel('btu')">
+                <div class="model-item-info">
+                  <span class="model-item-name">BTÜ Geçerken AI <span class="badge-mini">V2.1</span></span>
+                  <span class="model-item-desc">Topluluk ve kampüs yaşam asistanı</span>
+                </div>
+                <i class="fa-solid fa-check model-item-check"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="topbar-right">
+          <button class="btn-topbar-action" id="btnExportChat" onclick="exportCurrentChat()" title="Sohbeti İndir (.md)">
+            <i class="fa-solid fa-download"></i>
+          </button>
+          <button class="btn-theme-toggle" id="themeToggleBtn" onclick="toggleTheme()" title="Temayı Değiştir">
+            <i class="fa-solid fa-moon" id="themeIcon"></i>
+          </button>
+          <div class="chat-status">
+            <span></span> Çevrimiçi
+          </div>
+        </div>
+      </header>
+
+      <div class="chat-content-container">
+        <!-- KARŞILAMA EKRANI (HERO) -->
+        <div class="hero-greeting-view" id="heroGreetingView">
+          <img id="heroLogoImg" src="https://btugecerken.com/farabiai-Photoroom.png" alt="Logo" class="hero-logo">
+          <h1 class="hero-title">Hakikatin ve Bilginin Peşinde</h1>
+          <p class="hero-subtitle">"Öğrenmek akıl ve erdemin en yüksek basamağıdır."</p>
+
+          <div class="chat-bottom-wrapper">
+            <div class="file-preview-bar hidden" id="heroFilePreview">
+              <div class="file-preview-name">
+                <i class="fa-solid fa-paperclip"></i>
+                <span id="heroFileName"></span>
+              </div>
+              <button type="button" class="btn-remove-file" onclick="clearSelectedFile('hero')">
+                <i class="fa-solid fa-xmark"></i>
+              </button>
+            </div>
+
+            <input type="file" id="heroFileInput" class="file-input-hidden" onchange="handleFileSelected(event, 'hero')">
+
+            <form class="chat-input-area" id="heroForm">
+              <button type="button" class="btn-attach" onclick="triggerFileInput('hero')" title="Dosya Ekle">
+                <i class="fa-solid fa-paperclip"></i>
+              </button>
+              <textarea id="heroInput" placeholder="Mesajınızı yazın..." rows="1"></textarea>
+              <button type="submit" class="btn-send" title="Gönder">
+                <i class="fa-solid fa-paper-plane"></i>
+              </button>
+            </form>
+            <div class="ai-disclaimer" id="aiDisclaimer1">Farabi AI (Beta) felsefe ve genel bilgi sistemidir, hata yapabilir.</div>
+          </div>
+        </div>
+
+        <!-- MESAJ AKIŞ LİSTESİ -->
+        <div class="chat-messages hidden" id="chatMessages"></div>
+
+        <!-- AKTİF SOHBET ALT GİRİŞ ALANI -->
+        <div class="chat-bottom-wrapper hidden" id="bottomInputWrapper">
+          <div class="file-preview-bar hidden" id="chatFilePreview">
+            <div class="file-preview-name">
+              <i class="fa-solid fa-paperclip"></i>
+              <span id="chatFileName"></span>
+            </div>
+            <button type="button" class="btn-remove-file" onclick="clearSelectedFile('chat')">
+              <i class="fa-solid fa-xmark"></i>
+            </button>
+          </div>
+
+          <input type="file" id="chatFileInput" class="file-input-hidden" onchange="handleFileSelected(event, 'chat')">
+
+          <form class="chat-input-area" id="chatForm">
+            <button type="button" class="btn-attach" onclick="triggerFileInput('chat')" title="Dosya Ekle">
+              <i class="fa-solid fa-paperclip"></i>
+            </button>
+            <textarea id="userInput" placeholder="Mesajınızı yazın..." rows="1"></textarea>
+            <button type="submit" class="btn-send" title="Gönder">
+              <i class="fa-solid fa-paper-plane"></i>
+            </button>
+          </form>
+          <div class="ai-disclaimer" id="aiDisclaimer2">Farabi AI (Beta) felsefe ve genel bilgi sistemidir, hata yapabilir.</div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script src="app.js?v=7.0"></script>
+  
+  <!-- Yükleme Ekranı Kontrol Script'i -->
+  <script>
+    window.addEventListener('load', () => {
+      const loader = document.getElementById('siteLoader');
+      if (loader) {
+        // Ziyaretçinin mimari animasyonu görebilmesi için 1.4 saniye oynatılıp kapatılır
+        setTimeout(() => {
+          loader.classList.add('fade-out');
+          setTimeout(() => loader.remove(), 700);
+        }, 1400);
+      }
+    });
+  </script>
+</body>
+</html>

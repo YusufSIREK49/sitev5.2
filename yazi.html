@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="tr">
+<head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>Yazı Şablon | Blog</title>
+  
+  <link href="https://cdn1.site-media.eu/images/114/22934790/GeerkenLogo-Photoroom-82aMDiSMSNM52OeysD1XRQ-EgWrwxwoIVNv8WhyNw0qWA.png" rel="icon" type="image/x-icon"/>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&amp;family=Syne:wght@400;600;700;800&amp;family=Noto+Serif+TR:wght@300;400;500&amp;display=swap" rel="stylesheet"/>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet"/>
+  
+  <link rel="stylesheet" href="navbar.css">
+ <link rel="stylesheet" href="style.css?v=1.1">
+</head>
+<body>
+
+  <!-- Navbar Şablonu -->
+  <header class="custom-navbar">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo-wrap">
+      <img src="https://cdn1.site-media.eu/images/114/22934790/GeerkenLogo-Photoroom-82aMDiSMSNM52OeysD1XRQ-EgWrwxwoIVNv8WhyNw0qWA.png" alt="BTÜ Geçerken">
+      <div class="nav-logo-text">
+        <span class="nav-univ">Bursa Teknik Üniversitesi</span>
+        <span class="nav-comm">Geçerken Topluluğu</span>
+      </div>
+    </a>
+
+    <nav id="main-nav">
+      <a href="index.html" class="nav-link">Ana Sayfa</a>
+      <a href="etkinlikler.html" class="nav-link">Etkinlikler</a>
+      <a href="btugecerkenblog.html" class="nav-link active">BTU Geçerken BLOG</a>
+      <a href="https://btugecerkenai.btugecerken.com" class="nav-link">BTU GEÇERKEN AI</a>
+      <a href="ekibimiz.html" class="nav-link">Ekibimiz</a>
+      <a href="https://account.btugecerken.com" target="_blank" class="nav-btn-login">BTU GEÇERKEN ACCOUNT</a>
+    </nav>
+
+    <button id="mobile-menu-btn" aria-label="Menüyü aç/kapat">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+  <main class="container article-container">
+    <div id="articleDetail">
+      <!-- JavaScript içeriği buraya dinamik dolduracak -->
+    </div>
+  </main>
+
+  <script src="blog.js"></script>
+  <script>
+    // URL'den id parametresini al (Örn: yazi.html?id=31)
+    const urlParams = new URLSearchParams(window.location.search);
+    const postId = parseInt(urlParams.get('id'));
+
+    // Eşleşen blog yazısını bul
+    const post = blogPosts.find(p => p.id === postId);
+
+    const articleContainer = document.getElementById('articleDetail');
+
+    if (post) {
+      document.title = `${post.title} | BTU Geçerken`;
+      articleContainer.innerHTML = `
+        <div class="article-header">
+          <span class="post-cat">${post.cat}</span>
+          <h1>${post.title}</h1>
+          <div class="post-meta">${post.date}</div>
+        </div>
+        <div class="article-hero-img" style="background-image: url('${post.img}'); height: 350px; background-size: cover; margin: 20px 0;"></div>
+        <div class="article-body">
+          ${post.content}
+        </div>
+      `;
+    } else {
+      articleContainer.innerHTML = `<h2>Yazı bulunamadı!</h2><a href="btugecerkenblog.html">Bloglara Dön</a>`;
+    }
+  </script>
+
+</body>
+</html>

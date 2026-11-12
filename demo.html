@@ -1,0 +1,947 @@
+<!doctype html>
+<html lang="tr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BTÜ Geçerken Akademi | İngilizce Kursu Demo & Stüdyo</title>
+  
+  <link rel="icon" href="https://btugecerken.com/logogecerken-Photoroom (1).ico">
+  
+  <!-- Google Fonts (Başlıklar için Amiri & Syne, Metinler için Noto Sans - Göz yormayan ve alan tasarrufu sağlayan yapı) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Noto+Sans:ital,wght@0,300;0,400;0,500;0,700;1,400&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+  <link rel="stylesheet" href="navbar.css">
+  <link rel="stylesheet" href="style.css">
+
+  <style>
+    :root {
+      --cream:        #faf8f5; 
+      --white:        #ffffff; 
+      --card-bg:      rgba(255, 255, 255, 0.94);
+      --emerald:      #009B77; 
+      --emerald-mid:  #008263;
+      --emerald-light:#1ab38f;
+      --ink:          #111a16; 
+      --ink-soft:     #3a4742; 
+      --gold:         #40E0D0; 
+      --real-gold:    #c5a059;
+      --btn-icon:     #002366; 
+      --muted:        #788a84; 
+      --ai-purple:    #5b21b6;
+      --checkpoint-yellow: #f59e0b;
+      --islamic-border: 1.5px solid rgba(0, 155, 119, 0.2);
+      --thuluth-shadow: 0 12px 35px rgba(0, 35, 102, 0.06);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    
+    /* GÖZ YORMAYAN VE ALAN TASARRUFU SAĞLAYAN NOTO SANS GEÇİŞİ */
+    body {
+      font-family: 'Noto Sans', sans-serif;
+      background-color: var(--cream);
+      color: var(--ink);
+      overflow-x: hidden;
+      line-height: 1.65;
+      font-size: 14.5px;
+    }
+
+    h1, h2, h3, .section-title, .chapter-title {
+      font-family: 'Amiri', serif;
+    }
+
+    .academy-wrapper {
+      position: relative;
+      z-index: 1;
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 110px 20px 80px;
+    }
+
+    .academy-header { text-align: center; margin-bottom: 36px; }
+
+    .level-tabs {
+      display: inline-flex;
+      background: var(--white);
+      padding: 6px;
+      border-radius: 50px;
+      border: var(--islamic-border);
+      box-shadow: var(--thuluth-shadow);
+      gap: 6px;
+      margin-top: 16px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .level-tab {
+      font-family: 'Syne', sans-serif;
+      font-size: 12px;
+      font-weight: 700;
+      padding: 10px 20px;
+      border-radius: 50px;
+      border: none;
+      background: transparent;
+      color: var(--ink-soft);
+      cursor: pointer;
+      transition: all 0.25s ease;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .level-tab.active {
+      background: var(--emerald);
+      color: var(--white);
+      box-shadow: 0 4px 14px rgba(0, 155, 119, 0.25);
+    }
+
+    .level-tab.locked { opacity: 0.6; cursor: not-allowed; }
+
+    /* Üst Bannerlar (Seviye Tespit ve Admin Stüdyo Butonları) */
+    .top-actions-grid {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 16px;
+      margin-bottom: 36px;
+    }
+
+    @media (max-width: 768px) {
+      .top-actions-grid { grid-template-columns: 1fr; }
+    }
+
+    .placement-banner {
+      background: linear-gradient(135deg, #0d2b1d 0%, var(--btn-icon) 100%);
+      border: 1.5px solid var(--real-gold);
+      border-radius: 20px;
+      padding: 22px 26px;
+      color: var(--white);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      box-shadow: var(--thuluth-shadow);
+    }
+
+    .placement-info h3 { font-size: 22px; color: var(--real-gold); margin-bottom: 4px; }
+    .placement-info p { font-size: 13px; color: rgba(255, 255, 255, 0.85); font-family: 'Noto Sans', sans-serif; }
+
+    .btn-studio-toggle {
+      background: var(--white);
+      color: var(--btn-icon);
+      font-family: 'Syne', sans-serif;
+      font-size: 13px;
+      font-weight: 800;
+      padding: 0 24px;
+      border-radius: 20px;
+      border: 1.5px solid var(--real-gold);
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      transition: all 0.2s;
+      box-shadow: var(--thuluth-shadow);
+    }
+    .btn-studio-toggle:hover { background: var(--real-gold); color: #081c13; }
+
+    .btn-placement {
+      background: var(--real-gold);
+      color: #081c13;
+      font-family: 'Syne', sans-serif;
+      font-size: 12px;
+      font-weight: 800;
+      padding: 12px 22px;
+      border-radius: 50px;
+      border: none;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: all 0.2s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .btn-placement:hover { transform: translateY(-2px); background: #dfb76c; }
+
+    /* ==========================================================================
+       İÇERİK STÜDYOSU (ADMIN PANELİ) - GÖRSEL YÖNETİM ARAYÜZÜ
+       ========================================================================== */
+    .studio-panel {
+      background: var(--white);
+      border: 2px dashed var(--real-gold);
+      border-radius: 20px;
+      padding: 28px;
+      margin-bottom: 36px;
+      display: none;
+      box-shadow: var(--thuluth-shadow);
+    }
+    .studio-panel.open { display: block; }
+    
+    .form-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 16px;
+      margin-top: 16px;
+    }
+
+    .form-group { display: flex; flex-direction: column; gap: 6px; }
+    .form-group label { font-family: 'Syne', sans-serif; font-size: 11.5px; font-weight: 700; color: var(--btn-icon); text-transform: uppercase; }
+    .form-group input, .form-group select, .form-group textarea {
+      padding: 10px 14px;
+      border: 1.5px solid #cbd5e1;
+      border-radius: 10px;
+      font-family: 'Noto Sans', sans-serif;
+      font-size: 14px;
+      outline: none;
+    }
+    .form-group input:focus, .form-group select:focus, .form-group textarea:focus { border-color: var(--emerald); }
+
+    /* ==========================================================================
+       ZAMAN ÇİZELGESİ (TIMELINE) VE CHAPTER
+       ========================================================================== */
+    .chapter-container {
+      background: var(--white);
+      border: var(--islamic-border);
+      border-radius: 24px;
+      padding: clamp(24px, 5vw, 44px);
+      box-shadow: var(--thuluth-shadow);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .chapter-top-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 8px;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .chapter-title { font-size: clamp(22px, 3.5vw, 28px); font-weight: 700; color: var(--ink); }
+
+    .reset-demo-btn {
+      background: transparent;
+      border: 1px solid rgba(0, 155, 119, 0.3);
+      color: var(--muted);
+      font-family: 'Syne', sans-serif;
+      font-size: 11px;
+      font-weight: 700;
+      padding: 6px 12px;
+      border-radius: 50px;
+      cursor: pointer;
+    }
+    .reset-demo-btn:hover { color: var(--emerald); border-color: var(--emerald); }
+
+    .busuu-progress-wrap {
+      width: 100%;
+      height: 12px;
+      background: #e2e8f0;
+      border-radius: 20px;
+      position: relative;
+      margin: 18px 0 42px;
+    }
+
+    .busuu-progress-fill {
+      height: 100%;
+      background: var(--emerald);
+      border-radius: 20px;
+      transition: width 0.5s ease;
+      position: relative;
+      min-width: 42px;
+    }
+
+    .busuu-progress-pill {
+      position: absolute;
+      right: 0;
+      top: 50%;
+      transform: translateY(-50%);
+      background: var(--emerald);
+      color: var(--white);
+      font-family: 'Syne', sans-serif;
+      font-size: 11px;
+      font-weight: 800;
+      padding: 3px 10px;
+      border-radius: 20px;
+    }
+
+    .timeline-list { display: flex; flex-direction: column; position: relative; }
+
+    .timeline-step {
+      display: flex;
+      align-items: center;
+      gap: 22px;
+      position: relative;
+      padding-bottom: 38px;
+      cursor: pointer;
+      transition: transform 0.2s ease;
+    }
+    .timeline-step:last-child { padding-bottom: 0; }
+    .timeline-step:hover:not(.locked) { transform: translateX(6px); }
+    .timeline-step.locked { cursor: not-allowed; opacity: 0.65; }
+
+    .timeline-step:not(:last-child)::before {
+      content: '';
+      position: absolute;
+      left: 41px;
+      top: 86px;
+      bottom: 4px;
+      width: 4px;
+      background: #cbd5e1;
+      border-radius: 4px;
+      z-index: 1;
+      transition: background 0.3s;
+    }
+    .timeline-step.completed:not(:last-child)::before { background: var(--emerald); }
+
+    .step-circle-wrap { position: relative; width: 86px; height: 86px; flex-shrink: 0; z-index: 2; }
+
+    .step-circle {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      padding: 4px;
+      background: var(--white);
+      border: 4px solid #cbd5e1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      transition: all 0.3s;
+    }
+    .timeline-step.completed .step-circle { border-color: var(--emerald); }
+    .timeline-step.active-next .step-circle { border-color: var(--emerald); box-shadow: 0 0 0 6px rgba(0, 155, 119, 0.14); }
+    .step-circle img { width: 100%; height: 100%; object-fit: cover; border-radius: 50%; }
+
+    .step-circle.checkpoint-circle { background: #fffbeb; }
+    .checkpoint-inner { width: 100%; height: 100%; border-radius: 50%; background: var(--checkpoint-yellow); color: var(--white); display: flex; align-items: center; justify-content: center; font-size: 26px; }
+
+    .step-status-badge {
+      position: absolute;
+      bottom: -8px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: var(--emerald);
+      color: var(--white);
+      border: 3px solid var(--white);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+    }
+    .timeline-step.completed .step-status-badge { display: flex; }
+    .timeline-step.locked .step-status-badge.lock-icon { display: flex; background: #94a3b8; }
+
+    .step-content { display: flex; flex-direction: column; gap: 3px; }
+
+    .ai-practice-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      align-self: flex-start;
+      background: linear-gradient(90deg, #6d28d9, #4f46e5);
+      color: var(--white);
+      font-family: 'Syne', sans-serif;
+      font-size: 10px;
+      font-weight: 800;
+      text-transform: uppercase;
+      padding: 4px 12px;
+      border-radius: 50px;
+      margin-bottom: 4px;
+    }
+
+    .tv-practice-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      align-self: flex-start;
+      background: rgba(0, 155, 119, 0.1);
+      color: var(--emerald-mid);
+      border: 1px solid rgba(0, 155, 119, 0.25);
+      font-family: 'Syne', sans-serif;
+      font-size: 10px;
+      font-weight: 800;
+      text-transform: uppercase;
+      padding: 3px 10px;
+      border-radius: 50px;
+      margin-bottom: 3px;
+    }
+
+    .step-title { font-family: 'Syne', sans-serif; font-size: 16.5px; font-weight: 700; color: var(--ink); }
+    .step-subtitle { font-size: 13.5px; color: var(--ink-soft); }
+
+    /* ==========================================================================
+       DERS MODALI VE ETKİLEŞİMLİ EĞİTİM MOTORU
+       ========================================================================== */
+    .lesson-modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(17, 26, 22, 0.82);
+      backdrop-filter: blur(8px);
+      z-index: 10000;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+    }
+    .lesson-modal-overlay.open { display: flex; }
+
+    .lesson-modal-card {
+      background: var(--white);
+      border: 2px solid var(--emerald);
+      border-radius: 24px;
+      width: 100%;
+      max-width: 680px;
+      max-height: 92vh;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.4);
+    }
+
+    .modal-header {
+      padding: 18px 24px;
+      border-bottom: 1px solid rgba(0, 155, 119, 0.15);
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      background: var(--cream);
+    }
+
+    .modal-close-btn {
+      background: none; border: none; font-size: 20px; color: var(--ink-soft);
+      cursor: pointer; width: 36px; height: 36px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .modal-close-btn:hover { background: rgba(0,0,0,0.06); }
+
+    .modal-step-bar { flex: 1; height: 8px; background: #e2e8f0; border-radius: 10px; overflow: hidden; }
+    .modal-step-fill { height: 100%; background: var(--emerald); width: 50%; transition: width 0.3s; }
+    .modal-step-count { font-family: 'Syne', sans-serif; font-size: 12px; font-weight: 700; color: var(--emerald-mid); }
+
+    .modal-body { padding: 28px 26px; overflow-y: auto; flex: 1; }
+
+    .card-badge {
+      display: inline-block; font-family: 'Syne', sans-serif; font-size: 11px; font-weight: 700;
+      text-transform: uppercase; color: var(--emerald-mid); background: rgba(0, 155, 119, 0.08);
+      padding: 4px 12px; border-radius: 50px; margin-bottom: 12px;
+    }
+
+    .card-heading { font-size: 24px; color: var(--btn-icon); margin-bottom: 16px; line-height: 1.3; }
+
+    .vocab-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 14px; margin-bottom: 20px; }
+    .vocab-item { background: var(--cream); border: 1.5px solid rgba(0, 155, 119, 0.2); border-radius: 16px; padding: 16px; text-align: center; }
+    .vocab-en { font-family: 'Syne', sans-serif; font-size: 16px; font-weight: 800; color: var(--btn-icon); margin-bottom: 4px; display: flex; align-items: center; justify-content: center; gap: 8px; }
+    .speak-btn { background: rgba(0, 155, 119, 0.12); color: var(--emerald); border: none; width: 28px; height: 28px; border-radius: 50%; cursor: pointer; }
+    .vocab-tr { font-size: 13px; color: var(--ink-soft); }
+    .vocab-ex { font-size: 11.5px; color: var(--muted); font-style: italic; margin-top: 8px; padding-top: 8px; border-top: 1px dashed rgba(0,155,119,0.15); }
+
+    .quiz-options { display: flex; flex-direction: column; gap: 12px; margin-top: 16px; }
+    .quiz-option {
+      padding: 14px 18px; border-radius: 14px; border: 2px solid #e2e8f0; background: var(--white);
+      font-size: 14.5px; color: var(--ink); text-align: left; cursor: pointer; display: flex; align-items: center; justify-content: space-between;
+      transition: all 0.2s;
+    }
+    .quiz-option:hover { border-color: var(--emerald); background: rgba(0,155,119,0.03); }
+    .quiz-option.correct { border-color: var(--emerald) !important; background: rgba(0, 155, 119, 0.12) !important; color: var(--emerald-mid) !important; font-weight: 700; }
+    .quiz-option.wrong { border-color: #ef4444 !important; background: rgba(239, 68, 68, 0.08) !important; color: #b91c1c !important; }
+
+    .sentence-box { background: var(--cream); border: var(--islamic-border); padding: 18px; border-radius: 16px; font-size: 16px; margin-bottom: 18px; line-height: 2; }
+    .blank-slot { display: inline-block; min-width: 90px; padding: 2px 14px; margin: 0 6px; border-bottom: 2.5px solid var(--emerald); background: var(--white); border-radius: 8px; font-family: 'Syne', sans-serif; font-weight: 700; color: var(--btn-icon); text-align: center; cursor: pointer; }
+    .word-bank { display: flex; gap: 10px; flex-wrap: wrap; }
+    .word-chip { padding: 8px 18px; border-radius: 50px; background: var(--white); border: 1.5px solid var(--emerald); color: var(--emerald-mid); font-family: 'Syne', sans-serif; font-size: 13px; font-weight: 700; cursor: pointer; }
+
+    .ai-writing-box { background: #f5f3ff; border: 1.5px solid #c4b5fd; border-radius: 16px; padding: 18px; margin-bottom: 16px; }
+    .ai-textarea { width: 100%; min-height: 95px; border: 1.5px solid #cbd5e1; border-radius: 12px; padding: 12px; font-size: 14.5px; outline: none; margin-top: 10px; font-family: 'Noto Sans', sans-serif; }
+    
+    /* GÖRSEL HATA GÖSTERİMİ (DIFF TARZI ÜSTÜ ÇİZİLİ VE YEŞİL VURGULU) */
+    .diff-box {
+      margin-top: 14px; padding: 16px; border-radius: 12px; background: var(--white);
+      border-left: 4px solid var(--ai-purple); font-size: 14px; display: none;
+    }
+    .diff-del { color: #dc2626; background: #fee2e2; padding: 2px 6px; border-radius: 4px; text-decoration: line-through; }
+    .diff-ins { color: #059669; background: #d1fae5; padding: 2px 6px; border-radius: 4px; font-weight: 700; }
+
+    .reading-article-box { background: var(--cream); border-left: 4px solid var(--real-gold); padding: 18px; border-radius: 0 16px 16px 0; margin-bottom: 18px; font-size: 15px; line-height: 1.8; }
+
+    .feedback-banner { margin-top: 14px; padding: 12px 16px; border-radius: 12px; font-size: 13.5px; font-weight: 600; display: none; }
+    .feedback-banner.ok { display: block; background: rgba(0, 155, 119, 0.12); color: var(--emerald-mid); }
+    .feedback-banner.err { display: block; background: rgba(239, 68, 68, 0.1); color: #b91c1c; }
+
+    .modal-footer { padding: 16px 24px; border-top: 1px solid rgba(0, 155, 119, 0.15); display: flex; justify-content: space-between; align-items: center; background: var(--cream); }
+
+    .btn-modal-action {
+      background: var(--emerald); color: var(--white); font-family: 'Syne', sans-serif;
+      font-size: 12.5px; font-weight: 800; text-transform: uppercase; padding: 12px 26px;
+      border-radius: 50px; border: none; cursor: pointer; margin-left: auto;
+      display: inline-flex; align-items: center; gap: 8px;
+    }
+    .btn-modal-action:hover { background: var(--btn-icon); }
+  </style>
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <header class="custom-navbar">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo-wrap">
+        <img src="https://btugecerken.com/logogecerken-Photoroom (1).ico" alt="BTÜ Geçerken">
+        <div class="nav-logo-text">
+          <span class="nav-univ">Bursa Teknik Üniversitesi</span>
+          <span class="nav-comm">Geçerken Topluluğu</span>
+        </div>
+      </a>
+
+      <nav id="main-nav">
+        <a href="index.html" class="nav-link">Ana Sayfa</a>
+        <a href="etkinlikler.html" class="nav-link">Etkinlikler</a>
+        <a href="btugecerkenblog.html" class="nav-link">BTÜ Geçerken BLOG</a>
+        <a href="dergilik.html" class="nav-link">Dergilik</a>
+        <a href="demo.html" class="nav-link active">AKADEMİ (DEMO)</a>
+        <a href="btugecerkenai.html" class="nav-link">BTÜ GEÇERKEN AI</a>
+        <a href="btugecerkentv.html" target="_blank" class="nav-btn-login">BTÜ GEÇERKEN TV</a>
+      </nav>
+
+      <button id="mobile-menu-btn" aria-label="Menüyü aç/kapat"><span></span><span></span><span></span></button>
+    </div>
+  </header>
+
+  <main class="academy-wrapper">
+
+    <div class="academy-header">
+      <div class="hero-badge" style="margin-bottom: 12px;"><span></span> BTÜ Geçerken Dil Akademisi · Pilot Stüdyo Sürümü</div>
+      <h1 class="section-title">İngilizce <em>Yolculuğun</em></h1>
+      <p style="color: var(--ink-soft); font-size: 14.5px; max-width: 580px; margin: 8px auto 0;">
+        Busuu metodolojisi, BTÜ Geçerken TV entegrasyonu ve görsel hata gösterimli AI yazma koçu.
+      </p>
+
+      <div class="level-tabs">
+        <button class="level-tab active"><i class="fa-solid fa-bolt"></i> A1 · Hızlandırılmış Kamp (10 Bölüm)</button>
+        <button class="level-tab locked"><i class="fa-solid fa-lock"></i> A2 · Temel İletişim (31 Bölüm)</button>
+        <button class="level-tab locked"><i class="fa-solid fa-lock"></i> B1 · Orta Seviye (29 Bölüm)</button>
+      </div>
+    </div>
+
+    <!-- ÜST AKSİYONLAR: SEVİYE TESPİT & İÇERİK YÖNETİM STÜDYOSU AÇMA -->
+    <div class="top-actions-grid">
+      <div class="placement-banner">
+        <div class="placement-info">
+          <h3><i class="fa-solid fa-compass"></i> Adaptif Seviye Tespit Sınavı</h3>
+          <p>Seviyeni gizlice test et, uygun modülden başla. (Doğru/Yanlış geri bildirimli)</p>
+        </div>
+        <button class="btn-placement" onclick="openPlacementModal()"><i class="fa-solid fa-wand-magic-sparkles"></i> Sınava Başla</button>
+      </div>
+
+      <button class="btn-studio-toggle" onclick="toggleStudioPanel()">
+        <i class="fa-solid fa-sliders" style="font-size:20px; color:var(--real-gold);"></i>
+        <span>İçerik Stüdyosu (Admin)</span>
+      </button>
+    </div>
+
+    <!-- GÖRSEL İÇERİK YÖNETİM PANELİ (YENİ EKLENEN STÜDYO) -->
+    <div class="studio-panel" id="studioPanel">
+      <span class="card-badge"><i class="fa-solid fa-database"></i> Kurs ve Medya Stüdyosu (Admin)</span>
+      <h3 style="font-size:20px; color:var(--btn-icon); margin-bottom:10px;">Yeni Ders / Medya Ekle (MP4, PDF, Soru)</h3>
+      <p style="font-size:13.5px; color:var(--ink-soft); margin-bottom:16px;">Bu panel üzerinden sisteme kolayca yeni materyaller yükleyebilir ve JSON olarak dışa aktarabilirsin.</p>
+      
+      <div class="form-grid">
+        <div class="form-group">
+          <label>Seviye Seçimi</label>
+          <select id="stLevel"><option value="A1">A1 Hızlandırılmış</option><option value="A2">A2 Temel</option><option value="B1">B1 Orta</option></select>
+        </div>
+        <div class="form-group">
+          <label>Bölüm Adı</label>
+          <input type="text" id="stChapterTitle" placeholder="Örn: Bölüm 2: Alışveriş ve Fiyatlar">
+        </div>
+        <div class="form-group">
+          <label>Medya Türü</label>
+          <select id="stMediaType"><option value="video">Adobe Express / YouTube (MP4)</option><option value="pdf">Dergi Parçası / PDF</option><option value="quiz">Test Sorusu</option></select>
+        </div>
+        <div class="form-group">
+          <label>Medya Bağlantısı (URL / Dosya)</label>
+          <input type="text" id="stMediaUrl" placeholder="https://youtube.com/... veya PDF linki">
+        </div>
+      </div>
+      <button class="btn-placement" style="margin-top:16px;" onclick="alert('Demo Modu: İçerik başarıyla hafızaya eklendi! (Canlıda doğrudan Supabase / JSON dosyasına kaydedilir).')">
+        <i class="fa-solid fa-cloud-arrow-up"></i> İçeriği Kaydet & Yayınla
+      </button>
+    </div>
+
+    <!-- CHAPTER KARTI VE ZAMAN ÇİZELGESİ -->
+    <section class="chapter-container">
+      <div class="chapter-top-meta">
+        <div>
+          <span class="section-label" style="margin-bottom:4px; display:block;">A1 HIZLANDIRILMIŞ KAMP · CHAPTER 1 / 10</span>
+          <h2 class="chapter-title">Bölüm 1: Selamlamalar ve Kampüste Tanışma</h2>
+        </div>
+        <button class="reset-demo-btn" onclick="resetProgress()"><i class="fa-solid fa-rotate-right"></i> İlerlemeyi Sıfırla</button>
+      </div>
+
+      <div class="busuu-progress-wrap">
+        <div class="busuu-progress-fill" id="chapterProgressFill" style="width: 16%;">
+          <span class="busuu-progress-pill" id="chapterProgressText">16%</span>
+        </div>
+      </div>
+
+      <div class="timeline-list" id="timelineList"></div>
+    </section>
+
+  </main>
+
+  <!-- ETKİLEŞİMLİ DERS MODALI -->
+  <div class="lesson-modal-overlay" id="lessonModal">
+    <div class="lesson-modal-card">
+      <div class="modal-header">
+        <button class="modal-close-btn" onclick="closeLessonModal()"><i class="fa-solid fa-xmark"></i></button>
+        <div class="modal-step-bar"><div class="modal-step-fill" id="modalStepFill"></div></div>
+        <span class="modal-step-count" id="modalStepCount">1 / 2</span>
+      </div>
+
+      <div class="modal-body" id="modalBody"></div>
+
+      <div class="modal-footer">
+        <button class="btn-modal-action" id="modalNextBtn" onclick="handleModalNext()">Devam Et <i class="fa-solid fa-arrow-right"></i></button>
+      </div>
+    </div>
+  </div>
+
+  <footer class="site-footer" style="margin-top: 60px;">
+    <div class="footer-container">
+      <div class="footer-col footer-brand">
+        <div class="f-logo">
+          <img src="https://cdn1.site-media.eu/images/114/22934790/GeerkenLogo-Photoroom-82aMDiSMSNM52OeysD1XRQ-EgWrwxwoIVNv8WhyNw0qWA.png" alt="Logo">
+          <h3>BTÜ Geçerken</h3>
+        </div>
+        <p class="f-desc">Bursa Teknik Üniversitesi bünyesinde ilmi, kültürel ve dijital üretimleri buluşturan öğrenci topluluğu.</p>
+        <div class="f-motto">"Geçerken Güzel Bir İz Bırak"</div>
+      </div>
+      <div class="footer-col">
+        <h4 class="f-title">Ekosistem</h4>
+        <ul class="f-links">
+          <li><a href="index.html">Ana Sayfa</a></li>
+          <li><a href="dergilik.html">Dergilik</a></li>
+          <li><a href="demo.html">Akademi</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="footer-bottom-inner"><span>© 2026 BTÜ Geçerken Topluluğu · Akademi Sürümü</span></div>
+    </div>
+  </footer>
+
+  <script>
+    // İÇERİK STÜDYO PANELİNİ AÇ/KAPA
+    function toggleStudioPanel() {
+      document.getElementById("studioPanel").classList.toggle("open");
+    }
+
+    const CHAPTER_STEPS = [
+      {
+        id: 1, type: "vocab", title: "Kelimeler: Nasıl olduğunu söyleme", subtitle: "Kampüste tanışma ve temel selamlaşma kelimeleri",
+        avatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=240&q=80",
+        cards: [
+          { kind: "flashcards", badge: "Adım 1/6 · Kelime Hazinesi", heading: "Temel Selamlaşma", items: [
+            { en: "Hello / Hi", tr: "Merhaba", ex: "Hi! Welcome to BTU." },
+            { en: "How is it going?", tr: "Nasıl gidiyor?", ex: "Hey Ahmet, how is it going?" }
+          ]},
+          { kind: "quiz", badge: "Adım 1/6 · Pekiştirme", heading: "Kampüste tanışırken 'Department' kelimesi ne anlama gelir?", options: [
+            { text: "Kütüphane", correct: false }, { text: "Bölüm (Fakülte)", correct: true }, { text: "Yemekhane", correct: false }
+          ], explanation: "'Department' akademik bölüm demektir." }
+        ]
+      },
+      {
+        id: 2, type: "grammar", title: "Dil Bilgisi: Bir kişiye hitap etme", subtitle: "\"am / is / are\" yardımcı fiilleri",
+        avatar: "https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=240&q=80",
+        cards: [
+          { kind: "grammar_lesson", badge: "Adım 2/6 · Gramer", heading: "To Be: am / is / are", desc: "Durum ve meslek bildirirken kullanılır.", rules: ["I am a student.", "She is from Bursa."] },
+          { kind: "quiz", badge: "Adım 2/6 · Kontrol", heading: "\"Meliha ___ an engineering student.\" boşluğa ne gelir?", options: [
+            { text: "am", correct: false }, { text: "is", correct: true }, { text: "are", correct: false }
+          ], explanation: "Meliha tekil olduğu için 'is' alır." }
+        ]
+      },
+      {
+        id: 3, type: "sentences", title: "Cümle Yapıları: Başkalarına sorular sorma", subtitle: "BTÜ Geçerken TV kesiti", tvBadge: "📺 TV KESİTİ",
+        avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=240&q=80",
+        cards: [
+          { kind: "fill_blank", badge: "Adım 3/6 · Diyalog", heading: "Boşluğu Tamamla", context: "TV röportaj kesiti.", sentenceBefore: "— Hello! ", sentenceAfter: " you a student?", correctWord: "Are", wordBank: ["Am", "Is", "Are"], explanation: "'you' öznesinden önce 'Are' gelir." }
+        ]
+      },
+      {
+        id: 4, type: "ai_writing", title: "Kendin hakkında yazma", subtitle: "AI Yazma Pratiği", aiBadge: "✨ AI YAZMA PRATİĞİ",
+        avatar: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=240&q=80",
+        cards: [
+          { kind: "ai_writing", badge: "Adım 4/6 · AI Koç", heading: "Kendini Tanıt", promptText: "İngilizce olarak adını ve bölümünü yaz.", hint: "İpucu: 'My name is... and I study...' kalıbını kullan." }
+        ]
+      },
+      {
+        id: 5, type: "reading", title: "Okuma (Reading): Kampüste İlk Gün", subtitle: "Dergilik Parçası",
+        avatar: "https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?auto=format&fit=crop&w=240&q=80",
+        cards: [
+          { kind: "reading", badge: "Adım 5/6 · Dergi Paragrafı", heading: "A Morning in Bursa", paragraph: "Hello! My name is Tarık. I am a freshman at BTU. My department is Computer Engineering.", question: "Tarık hangi bölümde okumaktadır?", options: [
+            { text: "Mimarlık", correct: false }, { text: "Bilgisayar Mühendisliği", correct: true }, { text: "Makine", correct: false }
+          ], explanation: "Parçada 'Computer Engineering' yazmaktadır." }
+        ]
+      },
+      {
+        id: 6, type: "checkpoint", title: "Kontrol noktası", subtitle: "Bölüm testi", isCheckpoint: true,
+        cards: [
+          { kind: "quiz", badge: "🏁 Kontrol Noktası · Soru 1/1", heading: "\"We ___ members of BTU.\" cümlesini tamamlayan şık:", options: [
+            { text: "am", correct: false }, { text: "are", correct: true }
+          ], explanation: "'We' çoğul öznesi 'are' alır." }
+        ]
+      }
+    ];
+
+    let completedSteps = JSON.parse(localStorage.getItem("btu_academy_demo_a1_ch1")) || [1];
+
+    function saveProgress() {
+      localStorage.setItem("btu_academy_demo_a1_ch1", JSON.stringify(completedSteps));
+      renderTimeline();
+    }
+    function resetProgress() { completedSteps = []; saveProgress(); }
+
+    function renderTimeline() {
+      const listEl = document.getElementById("timelineList");
+      listEl.innerHTML = "";
+      const pct = Math.round((completedSteps.length / CHAPTER_STEPS.length) * 100);
+      document.getElementById("chapterProgressFill").style.width = Math.max(pct, 8) + "%";
+      document.getElementById("chapterProgressText").textContent = pct + "%";
+
+      CHAPTER_STEPS.forEach((step, idx) => {
+        const isCompleted = completedSteps.includes(step.id);
+        const isUnlocked = idx === 0 || completedSteps.includes(CHAPTER_STEPS[idx - 1].id) || isCompleted;
+        const isNext = !isCompleted && isUnlocked;
+
+        const stepDiv = document.createElement("div");
+        stepDiv.className = `timeline-step ${isCompleted ? "completed" : ""} ${isNext ? "active-next" : ""} ${!isUnlocked ? "locked" : ""}`;
+        stepDiv.onclick = () => {
+          if (!isUnlocked) { alert("🔒 Bu adıma geçmek için önce önceki adımı tamamlamalısın!"); return; }
+          openStepModal(step.id);
+        };
+
+        let circleInnerHTML = step.isCheckpoint ? 
+          `<div class="step-circle checkpoint-circle"><div class="checkpoint-inner"><i class="fa-solid fa-flag"></i></div></div>` :
+          `<div class="step-circle"><img src="${step.avatar}" alt=""></div>`;
+
+        let pillHTML = step.aiBadge ? `<span class="ai-practice-pill"><i class="fa-solid fa-wand-magic-sparkles"></i> ${step.aiBadge}</span>` :
+                       step.tvBadge ? `<span class="tv-practice-pill">${step.tvBadge}</span>` : "";
+
+        stepDiv.innerHTML = `
+          <div class="step-circle-wrap">
+            ${circleInnerHTML}
+            <div class="step-status-badge"><i class="fa-solid fa-check"></i></div>
+            ${!isUnlocked ? `<div class="step-status-badge lock-icon"><i class="fa-solid fa-lock"></i></div>` : ""}
+          </div>
+          <div class="step-content">
+            ${pillHTML}
+            <div class="step-title">${step.title}</div>
+            <div class="step-subtitle">${step.subtitle}</div>
+          </div>
+        `;
+        listEl.appendChild(stepDiv);
+      });
+    }
+
+    let activeStepObj = null, activeCardIndex = 0, currentCardVerified = false;
+
+    function openStepModal(stepId) {
+      activeStepObj = CHAPTER_STEPS.find(s => s.id === stepId);
+      activeCardIndex = 0;
+      document.getElementById("lessonModal").classList.add("open");
+      renderActiveCard();
+    }
+    function closeLessonModal() { document.getElementById("lessonModal").classList.remove("open"); }
+
+    function renderActiveCard() {
+      const card = activeStepObj.cards[activeCardIndex];
+      const total = activeStepObj.cards.length;
+      const bodyEl = document.getElementById("modalBody");
+      const nextBtn = document.getElementById("modalNextBtn");
+
+      document.getElementById("modalStepCount").textContent = `${activeCardIndex + 1} / ${total}`;
+      document.getElementById("modalStepFill").style.width = `${((activeCardIndex + 1) / total) * 100}%`;
+      currentCardVerified = false;
+
+      if (card.kind === "flashcards") {
+        currentCardVerified = true;
+        nextBtn.innerHTML = `Anladım, Geç <i class="fa-solid fa-arrow-right"></i>`;
+        bodyEl.innerHTML = `<span class="card-badge">${card.badge}</span><h3 class="card-heading">${card.heading}</h3><div class="vocab-grid">${card.items.map(i => `<div class="vocab-item"><div class="vocab-en">${i.en}</div><div class="vocab-tr">${i.tr}</div><div class="vocab-ex">"${i.ex}"</div></div>`).join("")}</div>`;
+      } else if (card.kind === "grammar_lesson") {
+        currentCardVerified = true;
+        nextBtn.innerHTML = `Kuralı Anladım <i class="fa-solid fa-arrow-right"></i>`;
+        bodyEl.innerHTML = `<span class="card-badge">${card.badge}</span><h3 class="card-heading">${card.heading}</h3><p>${card.desc}</p><div style="margin-top:12px;">${card.rules.map(r => `<div>• ${r}</div>`).join("")}</div>`;
+      } else if (card.kind === "quiz" || card.kind === "reading") {
+        nextBtn.innerHTML = `Kontrol Et <i class="fa-solid fa-check"></i>`;
+        let readingBox = card.kind === "reading" ? `<div class="reading-article-box">"${card.paragraph}"</div><p style="font-weight:700; margin-bottom:10px;">${card.question}</p>` : "";
+        bodyEl.innerHTML = `<span class="card-badge">${card.badge}</span><h3 class="card-heading">${card.heading}</h3>${readingBox}<div class="quiz-options">${card.options.map((opt, i) => `<button class="quiz-option" onclick="selectQuizOption(${i})"><span>${opt.text}</span><i class="fa-regular fa-circle"></i></button>`).join("")}</div><div class="feedback-banner" id="quizFeedback"></div>`;
+      } else if (card.kind === "fill_blank") {
+        nextBtn.innerHTML = `Kontrol Et <i class="fa-solid fa-check"></i>`;
+        bodyEl.innerHTML = `<span class="card-badge">${card.badge}</span><h3 class="card-heading">${card.heading}</h3><div class="sentence-box">${card.sentenceBefore}<span class="blank-slot" id="blankSlot" onclick="clearBlank()">?</span>${card.sentenceAfter}</div><div class="word-bank">${card.wordBank.map(w => `<button class="word-chip" onclick="fillBlank('${w}')">${w}</button>`).join("")}</div><div class="feedback-banner" id="quizFeedback"></div>`;
+      } else if (card.kind === "ai_writing") {
+        nextBtn.innerHTML = `AI Öğretmene İncelet <i class="fa-solid fa-wand-magic-sparkles"></i>`;
+        bodyEl.innerHTML = `<span class="ai-practice-pill">${card.badge}</span><h3 class="card-heading">${card.heading}</h3><div class="ai-writing-box"><p>${card.promptText}</p><textarea class="ai-textarea" id="aiUserSentence" placeholder="Örn: Hello, my name is Yusuf and I is a student..."></textarea></div><div class="diff-box" id="aiDiffBox"></div>`;
+      }
+    }
+
+    let selectedOptionIndex = null;
+    function selectQuizOption(idx) {
+      if (currentCardVerified) return;
+      selectedOptionIndex = idx;
+      document.querySelectorAll(".quiz-option").forEach((btn, i) => {
+        btn.classList.toggle("selected", i === idx);
+        btn.querySelector("i").className = i === idx ? "fa-solid fa-circle-dot" : "fa-regular fa-circle";
+      });
+    }
+
+    let filledWord = "";
+    function fillBlank(w) { if (!currentCardVerified) { filledWord = w; document.getElementById("blankSlot").textContent = w; } }
+    function clearBlank() { if (!currentCardVerified) { filledWord = ""; document.getElementById("blankSlot").textContent = "?"; } }
+
+    async function handleModalNext() {
+      const card = activeStepObj.cards[activeCardIndex];
+      const nextBtn = document.getElementById("modalNextBtn");
+      const fb = document.getElementById("quizFeedback");
+
+      if (!currentCardVerified) {
+        if (card.kind === "quiz" || card.kind === "reading") {
+          if (selectedOptionIndex === null) { alert("Lütfen bir şık seçin!"); return; }
+          const isCorrect = card.options[selectedOptionIndex].correct;
+          const optionBtns = document.querySelectorAll(".quiz-option");
+          if (isCorrect) {
+            optionBtns[selectedOptionIndex].classList.add("correct");
+            fb.className = "feedback-banner ok";
+            fb.innerHTML = `<i class="fa-solid fa-circle-check"> Doğru!</i> ${card.explanation}`;
+            currentCardVerified = true; selectedOptionIndex = null;
+            nextBtn.innerHTML = `Devam Et <i class="fa-solid fa-arrow-right"></i>`;
+          } else {
+            optionBtns[selectedOptionIndex].classList.add("wrong");
+            fb.className = "feedback-banner err";
+            fb.innerHTML = `<i class="fa-solid fa-circle-xmark"> Yanlış!</i> Doğru cevap işaretlendi. İpucu: ${card.explanation}`;
+          }
+          return;
+        }
+
+        if (card.kind === "fill_blank") {
+          if (!filledWord) { alert("Lütfen bir kelime seçin!"); return; }
+          if (filledWord === card.correctWord) {
+            fb.className = "feedback-banner ok";
+            fb.innerHTML = `<i class="fa-solid fa-circle-check"> Harika!</i> ${card.explanation}`;
+            currentCardVerified = true; filledWord = "";
+            nextBtn.innerHTML = `Devam Et <i class="fa-solid fa-arrow-right"></i>`;
+          } else {
+            fb.className = "feedback-banner err";
+            fb.innerHTML = `<i class="fa-solid fa-circle-xmark"> Yanlış kelime!</i> Tekrar dene.`;
+          }
+          return;
+        }
+
+        if (card.kind === "ai_writing") {
+          const text = document.getElementById("aiUserSentence").value.trim();
+          const diffBox = document.getElementById("aiDiffBox");
+          if (text.length < 5) { alert("Lütfen biraz daha uzun bir cümle yazın!"); return; }
+          
+          diffBox.style.display = "block";
+          diffBox.innerHTML = `<i class="fa-solid fa-spinner fa-spin"></i> Yapay zeka hatalarını inceliyor...`;
+
+          setTimeout(() => {
+            // Görsel hata simülasyonu (Örn: "is" yerine "am" hatası düzeltme gösterimi)
+            let correctedHtml = text.replace(/\bis\b/gi, '<span class="diff-del">is</span> <span class="diff-ins">am</span>');
+            diffBox.innerHTML = `
+              <div style="font-weight:700; color:var(--ai-purple); margin-bottom:6px;"><i class="fa-solid fa-wand-magic-sparkles"></i> AI Düzeltme & Hata Analizi:</div>
+              <p style="margin-bottom:8px;"><strong>Senin Cümlen:</strong> ${correctedHtml}</p>
+              <p style="font-size:13px; color:var(--ink-soft);"><strong>Açıklama:</strong> 'I' öznesinden sonra 'is' yerine 'am' kullanılmalıdır. Cümlenin geri kalanı gayet başarılı!</p>
+            `;
+            currentCardVerified = true;
+            nextBtn.innerHTML = `Harika! Devam Et <i class="fa-solid fa-arrow-right"></i>`;
+          }, 600);
+          return;
+        }
+      }
+
+      if (activeCardIndex < activeStepObj.cards.length - 1) {
+        activeCardIndex++;
+        renderActiveCard();
+      } else {
+        if (!completedSteps.includes(activeStepObj.id)) {
+          completedSteps.push(activeStepObj.id);
+          saveProgress();
+        }
+        closeLessonModal();
+      }
+    }
+
+    // GİZLİ SEVİYE TESPİT SINAVI (Seviye yazısı kaldırıldı, anlık doğru/yanlış renkli geri bildirim eklendi)
+    const PLACEMENT_QUESTIONS = [
+      { q: "1. Hello! Where ___ you from?", opts: ["am", "are", "is"], ans: 1 },
+      { q: "2. Yesterday, I ___ to the campus library.", opts: ["go", "went", "gone"], ans: 1 },
+      { q: "3. Bursa is ___ than Yalova.", opts: ["big", "bigger", "the biggest"], ans: 1 }
+    ];
+
+    function openPlacementModal() {
+      let qIdx = 0, consecutiveWrong = 0;
+      const modal = document.getElementById("lessonModal");
+      const bodyEl = document.getElementById("modalBody");
+      const nextBtn = document.getElementById("modalNextBtn");
+      modal.classList.add("open");
+
+      function renderP() {
+        const item = PLACEMENT_QUESTIONS[qIdx];
+        document.getElementById("modalStepCount").textContent = `Soru ${qIdx + 1} / ${PLACEMENT_QUESTIONS.length}`;
+        document.getElementById("modalStepFill").style.width = `${((qIdx + 1) / PLACEMENT_QUESTIONS.length) * 100}%`;
+        nextBtn.style.display = "none";
+
+        bodyEl.innerHTML = `
+          <span class="card-badge">Adaptif Sınav</span>
+          <h3 class="card-heading">${item.q}</h3>
+          <div class="quiz-options">
+            ${item.opts.map((o, i) => `<button class="quiz-option" id="plOpt${i}" onclick="checkPl(${i}, ${item.ans})"><span>${o}</span><i class="fa-regular fa-circle"></i></button>`).join("")}
+          </div>
+          <div class="feedback-banner" id="plFeedback"></div>
+        `;
+      }
+
+      window.checkPl = function(choice, correctIdx) {
+        const fb = document.getElementById("plFeedback");
+        const opts = document.querySelectorAll(".quiz-option");
+        
+        opts.forEach((b, i) => {
+          if (i === correctIdx) b.classList.add("correct");
+          else if (i === choice && choice !== correctIdx) b.classList.add("wrong");
+        });
+
+        if (choice === correctIdx) {
+          fb.className = "feedback-banner ok";
+          fb.innerHTML = `<i class="fa-solid fa-circle-check"></i> Doğru cevap!`;
+          consecutiveWrong = 0;
+        } else {
+          fb.className = "feedback-banner err";
+          fb.innerHTML = `<i class="fa-solid fa-circle-xmark"></i> Yanlış cevap!`;
+          consecutiveWrong++;
+        }
+
+        nextBtn.style.display = "inline-flex";
+        nextBtn.innerHTML = `Sonraki Soru <i class="fa-solid fa-arrow-right"></i>`;
+        nextBtn.onclick = () => {
+          qIdx++;
+          if (consecutiveWrong >= 2 || qIdx >= PLACEMENT_QUESTIONS.length) {
+            bodyEl.innerHTML = `<div style="text-align:center; padding:20px;"><h3 class="card-heading">Seviye Tespiti Tamamlandı!</h3><p>Uygun modül belirlendi.</p></div>`;
+            nextBtn.innerHTML = `Kursa Başla <i class="fa-solid fa-check"></i>`;
+            nextBtn.onclick = () => { closeLessonModal(); nextBtn.onclick = handleModalNext; };
+          } else {
+            renderP();
+          }
+        };
+      };
+      renderP();
+    }
+
+    document.addEventListener("DOMContentLoaded", renderTimeline);
+  </script>
+  <script src="navbar.js"></script>
+</body>
+</html>

@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <!-- Ana Dokümantasyon Sayfası -->
+  <url>
+    <loc>https://docs.btugecerken.com/</loc>
+    <lastmod>2026-11-04</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+
+  <!-- 1. Giriş ve Sistem Mimarisi -->
+  <url>
+    <loc>https://docs.btugecerken.com/?topic=ekosistem-genel-bakis</loc>
+    <lastmod>2026-11-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://docs.btugecerken.com/?topic=sunucu-ve-nginx-yapisi</loc>
+    <lastmod>2026-11-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://docs.btugecerken.com/?topic=tasarim-kimligi-ve-css</loc>
+    <lastmod>2026-11-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- 2. İçerik ve Yayıncılık Motorları -->
+  <url>
+    <loc>https://docs.btugecerken.com/?topic=blog-sistemi-mimarisi</loc>
+    <lastmod>2026-11-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://docs.btugecerken.com/?topic=etkinlik-takvimi-mimarisi</loc>
+    <lastmod>2026-11-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://docs.btugecerken.com/?topic=merkezi-footer-mimarisi</loc>
+    <lastmod>2026-11-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://docs.btugecerken.com/?topic=ekibimiz-ve-yonetim</loc>
+    <lastmod>2026-11-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <!-- 3. BTÜ Geçerken TV ve Medya -->
+  <url>
+    <loc>https://docs.btugecerken.com/?topic=tv-medya-mimarisi</loc>
+    <lastmod>2026-11-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://docs.btugecerken.com/?topic=oynatici-ve-canli-yayin</loc>
+    <lastmod>2026-11-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <!-- 4. Dergilik ve PDF Motoru -->
+  <url>
+    <loc>https://docs.btugecerken.com/?topic=dergilik-katalog-yapisi</loc>
+    <lastmod>2026-11-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://docs.btugecerken.com/?topic=pdf-cizim-ve-not-motoru</loc>
+    <lastmod>2026-11-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- 5. Yapay Zekâ ve Dify Ekosistemi -->
+  <url>
+    <loc>https://docs.btugecerken.com/?topic=dify-studyo-ve-modeller</loc>
+    <lastmod>2026-11-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://docs.btugecerken.com/?topic=sayfa-ici-asistan-popup</loc>
+    <lastmod>2026-11-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://docs.btugecerken.com/?topic=farabi-ai-beta-platformu</loc>
+    <lastmod>2026-11-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <!-- 6. Geliştirici Kılavuzu (How-To) -->
+  <url>
+    <loc>https://docs.btugecerken.com/?topic=yeni-blog-yazisi-ekleme</loc>
+    <lastmod>2026-11-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://docs.btugecerken.com/?topic=yeni-etkinlik-ekleme</loc>
+    <lastmod>2026-11-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://docs.btugecerken.com/?topic=yeni-dergi-sayisi-ekleme</loc>
+    <lastmod>2026-11-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://docs.btugecerken.com/?topic=yeni-video-ekleme</loc>
+    <lastmod>2026-11-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+</urlset>
